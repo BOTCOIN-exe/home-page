@@ -15,7 +15,19 @@
         body {
             background: url('https://raw.githubusercontent.com/BOTCOIN-exe/Botcoin-whitepaper/refs/heads/main/IMG_20250201_082442.png') no-repeat center center fixed;
             background-size: cover;
-            color: #FFD700; /* Warna emas agar mudah dibaca */
+            position: relative;
+        }
+
+        /* Overlay untuk mengurangi kontras background */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6); /* Lapisan gelap untuk menurunkan kontras */
+            z-index: -1;
         }
 
         .container {
@@ -23,14 +35,57 @@
             height: 100vh;
         }
 
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 70px;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+            border-bottom: 2px solid white;
+            z-index: 1000;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            width: 60px;
+            height: 60px;
+            margin-right: 10px;
+        }
+
+        .header-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .auth-buttons a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            margin-left: 15px;
+        }
+
+        .auth-buttons a:hover {
+            color: gold;
+        }
+
         /* Sidebar */
         .sidebar {
             width: 250px;
             background: rgba(0, 0, 0, 0.7);
-            padding: 20px;
+            padding: 100px 20px 20px;
             display: flex;
             flex-direction: column;
-            justify-content: flex-start;
             position: relative;
         }
 
@@ -50,7 +105,7 @@
         .sidebar::after {
             content: "";
             position: absolute;
-            top: 70px; /* Mulai dari bawah judul */
+            top: 70px; /* Mulai dari bawah header */
             bottom: 0;
             right: 0;
             width: 2px;
@@ -60,54 +115,13 @@
         /* Konten utama */
         .main-content {
             flex-grow: 1;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
+            padding: 100px 20px 20px;
         }
 
-        /* Header */
-        .header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-bottom: 2px solid white;
-            padding-bottom: 10px;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-        }
-
-        .logo img {
-            width: 60px;
-            height: 60px;
-            margin-right: 10px;
-        }
-
-        .header-title {
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        .auth-buttons {
-            font-size: 16px;
-        }
-
-        .auth-buttons a {
-            color: white;
-            text-decoration: none;
-            margin-left: 15px;
-        }
-
-        .auth-buttons a:hover {
-            color: gold;
-        }
-
-        /* Konten utama BOTCOIN */
+        /* Penjelasan BOTCOIN */
         .content {
-            margin-top: 20px;
             font-size: 18px;
+            color: #00FF00; /* Warna hijau agar lebih terlihat */
         }
 
         /* Footer */
@@ -129,6 +143,18 @@
     </style>
 </head>
 <body>
+    <!-- Header -->
+    <div class="header">
+        <div class="logo">
+            <img src="https://raw.githubusercontent.com/BOTCOIN-exe/Botcoin-whitepaper/refs/heads/main/IMG_20250201_082442.png" alt="BOTCOIN Logo">
+            <div class="header-title">BOTCOIN</div>
+        </div>
+        <div class="auth-buttons">
+            <a href="login.html">Login</a> | 
+            <a href="register.html">Register</a>
+        </div>
+    </div>
+
     <div class="container">
         <!-- Sidebar Menu -->
         <div class="sidebar">
@@ -141,34 +167,23 @@
 
         <!-- Main Content -->
         <div class="main-content">
-            <!-- Header -->
-            <div class="header">
-                <div class="logo">
-                    <img src="https://raw.githubusercontent.com/BOTCOIN-exe/Botcoin-whitepaper/refs/heads/main/IMG_20250201_082442.png" alt="BOTCOIN Logo">
-                    <div class="header-title">BOTCOIN</div>
-                </div>
-                <div class="auth-buttons">
-                    <a href="login.html">Login</a> | 
-                    <a href="register.html">Register</a>
-                </div>
-            </div>
-
-            <!-- Penjelasan BOTCOIN -->
             <div class="content">
                 <h2>Welcome to BOTCOIN</h2>
                 <p>
                     BOTCOIN is a revolutionary cryptocurrency designed to create a fair and transparent community-based mining system.
-                    Unlike traditional cryptocurrencies, BOTCOIN ensures equal opportunities for everyone to participate and earn rewards.
-                    Our mission is to build a decentralized economy where users can mine, trade, and utilize BOTCOIN in real-world applications.
-                    Join our growing community and be part of the future of digital finance!
+                    Unlike traditional cryptocurrencies, BOTCOIN ensures accessibility and sustainability for all users.
                 </p>
-            </div>
-
-            <!-- Footer -->
-            <div class="footer">
-                <a href="terms-of-service.html">Terms of Service</a>
+                <p>
+                    Our mining system allows users to earn BOTCOIN through airdrops, without the need for expensive mining hardware.
+                    We are committed to decentralization and user empowerment, making BOTCOIN the future of digital currency.
+                </p>
             </div>
         </div>
     </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <a href="terms.html">Terms of Service</a>
+    </div>
 </body>
-                        </html>
+</html>
