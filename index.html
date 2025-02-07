@@ -35,23 +35,23 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 80px;
+            height: 70px;
             background: rgba(0, 0, 0, 0.8);
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 10px 20px;
+            padding: 10px;
             border-bottom: 2px solid gold;
             z-index: 1000;
         }
 
         .logo {
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
         }
 
         .header-title {
-            font-size: 35px;
+            font-size: 24px;
             font-weight: bold;
             color: gold;
             text-transform: uppercase;
@@ -60,15 +60,15 @@
 
         .auth-buttons {
             display: flex;
-            gap: 10px;
+            gap: 5px;
         }
 
         .auth-buttons button {
             background: none;
             border: 2px solid gold;
             color: white;
-            font-size: 14px;
-            padding: 8px 12px;
+            font-size: 12px;
+            padding: 6px 8px;
             cursor: pointer;
             transition: 0.3s;
         }
@@ -80,20 +80,21 @@
 
         /* Sidebar */
         .sidebar {
-            width: 220px;
+            width: 200px;
             background: rgba(0, 0, 0, 0.7);
-            padding: 80px 15px 15px;
+            padding: 80px 10px;
             display: flex;
             flex-direction: column;
             position: fixed;
             height: 100vh;
+            left: 0;
         }
 
         .sidebar button {
             background: none;
             border: 2px solid gold;
             color: white;
-            font-size: 16px;
+            font-size: 14px;
             padding: 8px;
             margin: 4px 0;
             text-align: left;
@@ -109,9 +110,10 @@
 
         /* Main Content */
         .main-content {
-            margin-left: 250px;
-            padding: 100px 20px 20px;
+            margin-left: 220px;
+            padding: 90px 15px;
             color: white;
+            text-align: center;
         }
 
         /* Footer */
@@ -119,7 +121,7 @@
             position: fixed;
             bottom: 10px;
             right: 10px;
-            font-size: 14px;
+            font-size: 12px;
             color: white;
             display: flex;
             flex-direction: column;
@@ -130,12 +132,12 @@
             background: none;
             border: 2px solid gold;
             color: white;
-            font-size: 14px;
+            font-size: 12px;
             padding: 5px;
             margin: 3px 0;
             cursor: pointer;
             transition: 0.3s;
-            width: 150px;
+            width: 120px;
             text-align: center;
         }
 
@@ -144,22 +146,77 @@
             color: black;
         }
 
-        /* Responsif */
+        /* RESPONSIF untuk layar kecil */
         @media (max-width: 768px) {
             .sidebar {
-                width: 180px;
-                padding: 70px 10px 10px;
+                width: 160px;
+                padding: 70px 10px;
             }
+
             .main-content {
-                margin-left: 200px;
-                padding: 80px 10px 10px;
+                margin-left: 170px;
+                padding: 80px 10px;
+                font-size: 14px;
             }
+
             .header-title {
-                font-size: 25px;
+                font-size: 20px;
             }
+
             .auth-buttons button {
+                font-size: 10px;
+                padding: 5px;
+            }
+
+            .sidebar button {
                 font-size: 12px;
-                padding: 6px 10px;
+            }
+
+            .footer-right button {
+                width: 100px;
+                font-size: 10px;
+            }
+        }
+
+        /* Untuk layar yang lebih kecil lagi */
+        @media (max-width: 480px) {
+            .header {
+                height: 60px;
+                padding: 5px;
+            }
+
+            .logo {
+                width: 40px;
+                height: 40px;
+            }
+
+            .header-title {
+                font-size: 18px;
+            }
+
+            .sidebar {
+                width: 140px;
+                padding: 60px 5px;
+            }
+
+            .main-content {
+                margin-left: 150px;
+                padding: 70px 5px;
+                font-size: 12px;
+            }
+
+            .auth-buttons button {
+                font-size: 9px;
+                padding: 4px;
+            }
+
+            .sidebar button {
+                font-size: 10px;
+            }
+
+            .footer-right button {
+                width: 90px;
+                font-size: 9px;
             }
         }
     </style>
@@ -192,25 +249,14 @@
             BOTCOIN is a revolutionary cryptocurrency designed to create a fair and transparent community-based mining system.
             Unlike traditional cryptocurrencies, BOTCOIN ensures accessibility and sustainability for all users.
         </p>
-        <p>
-            Our mining system allows users to earn BOTCOIN through airdrops, without the need for expensive mining hardware.
-            We are committed to decentralization and user empowerment, making BOTCOIN the future of digital currency.
-        </p>
     </div>
 
-    <!-- Footer Kanan (Pilihan Bahasa) -->
+    <!-- Footer -->
     <div class="footer-right">
         <button>🌍 Choose Language</button>
         <button onclick="window.location.href='english.html'">🇬🇧 English</button>
         <button onclick="window.location.href='indonesia.html'">🇮🇩 Indonesia</button>
-        <button onclick="window.location.href='china.html'">🇨🇳 China</button>
-        <button onclick="window.location.href='russia.html'">🇷🇺 Russia</button>
-        <button onclick="window.location.href='brazil.html'">🇧🇷 Brazil</button>
-        <button onclick="window.location.href='thailand.html'">🇹🇭 Thailand</button>
-        <button onclick="window.location.href='africa.html'">🌍 Africa</button>
-        <button onclick="window.location.href='arab.html'">🇸🇦 Arabic</button>
-        <button onclick="window.location.href='india.html'">🇮🇳 Hindi</button>
     </div>
 
 </body>
-    </html>
+</html>
