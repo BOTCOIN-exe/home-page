@@ -12,14 +12,12 @@
             font-family: Arial, sans-serif;
         }
 
-        /* Background menggunakan gambar */
         body {
             background: url('https://raw.githubusercontent.com/BOTCOIN-exe/logo-botcoin/refs/heads/main/Screenshot_2025-02-07-14-32-59-88_99c04817c0de5652397fc8b56c3b3817.jpg') no-repeat center center fixed;
             background-size: cover;
             position: relative;
         }
 
-        /* Overlay efek gelap */
         body::before {
             content: "";
             position: absolute;
@@ -41,27 +39,43 @@
             background: rgba(0, 0, 0, 0.8);
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: space-between;
             padding: 10px 20px;
             border-bottom: 2px solid gold;
             z-index: 1000;
         }
 
-        /* Logo */
         .logo {
             width: 60px;
             height: 60px;
-            margin-right: 10px;
         }
 
-        /* Judul BOTCOIN */
         .header-title {
-            font-size: 40px;
+            font-size: 35px;
             font-weight: bold;
             color: gold;
             text-transform: uppercase;
             text-shadow: 3px 3px 10px rgba(255, 215, 0, 0.8);
-            letter-spacing: 2px;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .auth-buttons button {
+            background: none;
+            border: 2px solid gold;
+            color: white;
+            font-size: 14px;
+            padding: 8px 12px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .auth-buttons button:hover {
+            background: gold;
+            color: black;
         }
 
         /* Sidebar */
@@ -93,32 +107,14 @@
             color: black;
         }
 
-        /* Konten utama */
+        /* Main Content */
         .main-content {
             margin-left: 250px;
             padding: 100px 20px 20px;
             color: white;
         }
 
-        /* Footer Kiri untuk Terms */
-        .footer-left {
-            position: fixed;
-            bottom: 10px;
-            left: 10px;
-            font-size: 14px;
-            color: white;
-        }
-
-        .footer-left a {
-            color: white;
-            text-decoration: none;
-        }
-
-        .footer-left a:hover {
-            color: gold;
-        }
-
-        /* Footer kanan untuk Pilihan Bahasa */
+        /* Footer */
         .footer-right {
             position: fixed;
             bottom: 10px;
@@ -148,39 +144,39 @@
             color: black;
         }
 
-        /* Responsif untuk Android */
+        /* Responsif */
         @media (max-width: 768px) {
             .sidebar {
                 width: 180px;
                 padding: 70px 10px 10px;
-            }
-            .sidebar button {
-                font-size: 14px;
-                padding: 6px;
             }
             .main-content {
                 margin-left: 200px;
                 padding: 80px 10px 10px;
             }
             .header-title {
-                font-size: 30px;
+                font-size: 25px;
             }
-            .footer-right {
-                align-items: center;
-                right: 5px;
+            .auth-buttons button {
                 font-size: 12px;
+                padding: 6px 10px;
             }
         }
     </style>
 </head>
 <body>
+
     <!-- Header -->
     <div class="header">
         <img src="https://raw.githubusercontent.com/BOTCOIN-exe/logo-botcoin/refs/heads/main/Screenshot_2025-02-07-14-32-59-88_99c04817c0de5652397fc8b56c3b3817.jpg" alt="BOTCOIN Logo" class="logo">
         <div class="header-title">BOTCOIN</div>
+        <div class="auth-buttons">
+            <button onclick="window.location.href='login.html'">🔑 Login</button>
+            <button onclick="window.location.href='register.html'">📝 Register</button>
+        </div>
     </div>
 
-    <!-- Sidebar Menu -->
+    <!-- Sidebar -->
     <div class="sidebar">
         <button onclick="window.location.href='home.html'">🏠 Home</button>
         <button onclick="window.location.href='airdrop.html'">📢 AIRDROP</button>
@@ -202,11 +198,6 @@
         </p>
     </div>
 
-    <!-- Footer Kiri -->
-    <div class="footer-left">
-        <a href="terms.html">Terms of Service & Privacy</a>
-    </div>
-
     <!-- Footer Kanan (Pilihan Bahasa) -->
     <div class="footer-right">
         <button>🌍 Choose Language</button>
@@ -218,5 +209,6 @@
         <button onclick="window.location.href='thailand.html'">🇹🇭 Thailand</button>
         <button onclick="window.location.href='africa.html'">🌍 Africa</button>
     </div>
+
 </body>
 </html>
