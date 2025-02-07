@@ -12,14 +12,14 @@
             font-family: Arial, sans-serif;
         }
 
-        /* Background menggunakan gambar yang Anda berikan */
+        /* Background menggunakan gambar */
         body {
             background: url('https://raw.githubusercontent.com/BOTCOIN-exe/logo-botcoin/refs/heads/main/Screenshot_2025-02-07-14-32-59-88_99c04817c0de5652397fc8b56c3b3817.jpg') no-repeat center center fixed;
             background-size: cover;
             position: relative;
         }
 
-        /* Overlay untuk efek lebih gelap */
+        /* Overlay efek gelap */
         body::before {
             content: "";
             position: absolute;
@@ -64,11 +64,11 @@
             letter-spacing: 2px;
         }
 
-        /* Sidebar dengan tombol interaktif */
+        /* Sidebar */
         .sidebar {
-            width: 250px;
+            width: 220px;
             background: rgba(0, 0, 0, 0.7);
-            padding: 100px 20px 20px;
+            padding: 80px 15px 15px;
             display: flex;
             flex-direction: column;
             position: fixed;
@@ -79,9 +79,9 @@
             background: none;
             border: 2px solid gold;
             color: white;
-            font-size: 18px;
-            padding: 10px;
-            margin: 5px 0;
+            font-size: 16px;
+            padding: 8px;
+            margin: 4px 0;
             text-align: left;
             cursor: pointer;
             transition: 0.3s;
@@ -95,27 +95,70 @@
 
         /* Konten utama */
         .main-content {
-            margin-left: 270px;
+            margin-left: 250px;
             padding: 100px 20px 20px;
             color: white;
         }
 
-        /* Footer */
-        .footer {
-            position: absolute;
+        /* Footer kiri untuk Terms */
+        .footer-left {
+            position: fixed;
+            bottom: 10px;
+            left: 10px;
+            font-size: 14px;
+            color: white;
+        }
+
+        .footer-left a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .footer-left a:hover {
+            color: gold;
+        }
+
+        /* Footer kanan untuk Pilihan Bahasa */
+        .footer-right {
+            position: fixed;
             bottom: 10px;
             right: 10px;
             font-size: 14px;
             color: white;
         }
 
-        .footer a {
+        .footer-right a {
             color: white;
             text-decoration: none;
+            margin-left: 8px;
         }
 
-        .footer a:hover {
+        .footer-right a:hover {
             color: gold;
+        }
+
+        /* Responsif untuk Android */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 180px;
+                padding: 70px 10px 10px;
+            }
+            .sidebar button {
+                font-size: 14px;
+                padding: 6px;
+            }
+            .main-content {
+                margin-left: 200px;
+                padding: 80px 10px 10px;
+            }
+            .header-title {
+                font-size: 30px;
+            }
+            .footer-right {
+                text-align: center;
+                right: 5px;
+                font-size: 12px;
+            }
         }
     </style>
 </head>
@@ -148,9 +191,27 @@
         </p>
     </div>
 
-    <!-- Footer -->
-    <div class="footer">
+    <!-- Footer Kiri -->
+    <div class="footer-left">
         <a href="terms.html">Terms of Service & Privacy</a>
     </div>
+
+    <!-- Footer Kanan (Pilihan Bahasa) -->
+    <div class="footer-right">
+        <a href="english.html">English</a> |
+        <a href="indonesia.html">Indonesia</a> |
+        <a href="china.html">China</a> |
+        <a href="russia.html">Rusia</a> |
+        <a href="uk.html">Inggris</a> |
+        <a href="australia.html">Australia</a> |
+        <a href="india.html">India</a> |
+        <a href="arab.html">Arab Saudi</a> |
+        <a href="mesir.html">Mesir</a> |
+        <a href="brazil.html">Brazil</a> |
+        <a href="philippines.html">Philippine</a> |
+        <a href="cambodia.html">Kamboja</a> |
+        <a href="thailand.html">Thailand</a> |
+        <a href="africa.html">Afrika</a>
+    </div>
 </body>
-</html>
+    </html>
