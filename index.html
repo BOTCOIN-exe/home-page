@@ -186,10 +186,6 @@
             <input type="email" placeholder="Email" id="regEmail">
             <input type="password" placeholder="Password" id="regPassword">
             <input type="password" placeholder="Confirm Password" id="regConfirmPassword">
-            <div>
-                <label for="captcha">Captcha: </label>
-                <input type="text" id="captcha" placeholder="Enter Captcha">
-            </div>
             <button onclick="register()">Register</button>
             <button onclick="closeModal('registerModal')" class="modal-close">Close</button>
         </div>
@@ -223,9 +219,8 @@
             const email = document.getElementById('regEmail').value;
             const password = document.getElementById('regPassword').value;
             const confirmPassword = document.getElementById('regConfirmPassword').value;
-            const captcha = document.getElementById('captcha').value;
 
-            if (username && email && password && confirmPassword && captcha) {
+            if (username && email && password && confirmPassword) {
                 if (password === confirmPassword) {
                     // Google Spreadsheet API Call (for illustration purposes)
                     alert('Registration successful');
@@ -262,4 +257,4 @@
     </script>
 
 </body>
-        </html>
+                </html>
