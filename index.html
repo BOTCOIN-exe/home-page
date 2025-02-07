@@ -25,7 +25,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.3); /* Pencahayaan background dikurangi menjadi 0.3 */
             z-index: -1;
         }
 
@@ -126,54 +126,6 @@
             display: flex;
             flex-direction: column;
             align-items: flex-end;
-        }
-
-        .language-dropdown {
-            position: relative;
-        }
-
-        .language-dropdown button {
-            background: none;
-            border: 2px solid gold;
-            color: white;
-            font-size: 12px;
-            padding: 5px;
-            cursor: pointer;
-            transition: 0.3s;
-            width: 120px;
-            text-align: center;
-        }
-
-        .language-dropdown button:hover {
-            background: gold;
-            color: black;
-        }
-
-        .language-list {
-            display: none;
-            position: absolute;
-            background: rgba(0, 0, 0, 0.8);
-            border: 2px solid gold;
-            list-style: none;
-            padding: 5px;
-            width: 120px;
-            bottom: 100%;  /* Menampilkan daftar di atas tombol */
-            left: 0;
-            max-height: 150px;  /* Menambah tinggi maksimal untuk scroll */
-            overflow-y: auto;  /* Jika daftar terlalu panjang, memungkinkan scroll */
-        }
-
-        .language-list li {
-            padding: 5px;
-            cursor: pointer;
-            text-align: center;
-            color: white;
-            border-bottom: 1px solid gold;
-        }
-
-        .language-list li:hover {
-            background: gold;
-            color: black;
         }
 
         /* Modal */
@@ -314,20 +266,7 @@
 
     <!-- Footer -->
     <div class="footer-right">
-        <div class="language-dropdown">
-            <button onclick="toggleLanguageList()">🌍 Language Options</button>
-            <ul class="language-list" id="languageList">
-                <li>🇬🇧 ENGLISH</li>
-                <li>🇷🇺 RUSSIA</li>
-                <li>🇮🇩 INDONESIA</li>
-                <li>🇨🇳 CHINA</li>
-                <li>🇸🇦 SAUDI ARABIA</li>
-                <li>🇮🇳 INDIA</li>
-                <li>🇹🇭 THAILAND</li>
-                <li>🇵🇭 PHILIPPINES</li>
-                <li>🇻🇳 VIETNAM</li>
-            </ul>
-        </div>
+        <button>Terms of Service & Privacy Policy</button>
     </div>
 
     <!-- Login Modal -->
@@ -341,10 +280,13 @@
     </div>
 
     <script>
-        function toggleLanguageList() {
-            const languageList = document.getElementById('languageList');
-            languageList.style.display = (languageList.style.display === 'block') ? 'none' : 'block';
+        function openLoginModal() {
+            document.getElementById('loginModal').style.display = 'block';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
         }
     </script>
 </body>
-</
+        </html>
