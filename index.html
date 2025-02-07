@@ -16,6 +16,7 @@
             background: url('https://raw.githubusercontent.com/BOTCOIN-exe/logo-botcoin/refs/heads/main/Screenshot_2025-02-07-14-32-59-88_99c04817c0de5652397fc8b56c3b3817.jpg') no-repeat center center fixed;
             background-size: cover;
             position: relative;
+            margin-top: 70px; /* Menambahkan jarak sesuai dengan tinggi header */
         }
 
         /* Overlay untuk mengurangi kejelasan background dan blur */
@@ -154,6 +155,7 @@
 
         .content {
             padding: 20px;
+            padding-top: 100px; /* Menambahkan jarak dari header */
             color: white;
             font-size: 16px;
             line-height: 1.6;
@@ -261,16 +263,4 @@
 
         if (username && email && password && confirmPassword) {
             if (password === confirmPassword) {
-                alert('Registration successful');
-                closeModal('registerModal');
-            } else {
-                alert('Passwords do not match');
-            }
-        } else {
-            alert('Please fill in all fields');
-        }
-    }
-</script>
-
-</body>
-    </html>
+                alert('Registration successful
