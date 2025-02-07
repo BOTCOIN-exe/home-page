@@ -157,6 +157,10 @@
             list-style: none;
             padding: 5px;
             width: 120px;
+            bottom: 100%;  /* Menampilkan daftar di atas tombol */
+            left: 0;
+            max-height: 150px;  /* Menambah tinggi maksimal untuk scroll */
+            overflow-y: auto;  /* Jika daftar terlalu panjang, memungkinkan scroll */
         }
 
         .language-list li {
@@ -305,7 +309,7 @@
     <!-- Main Content -->
     <div class="main-content">
         <h2>Welcome to BOTCOIN</h2>
-        <p>Welcome to BOTCOIN. On this page, you can participate in the BOTCOIN AIRDROP by signing up, logging in, and then clicking the AIRDROP button on the right side. You can also view the BOTCOIN whitepaper on the right side of this page. To participate in the pre-sale, click the pre-sale button on the right side. You can view the terms of service & privacy policy of BOTCOIN at the bottom right of this page. If you need assistance, click the Help Center button on the left sidebar of this page. Thank you for visiting the BOTCOIN page. Best regards from Dev: "THE ONE WHO ONCE WAS".</p>
+        <p> On this page, you can participate in the BOTCOIN AIRDROP by signing up, logging in, and then clicking the AIRDROP button on the right side. You can also view the BOTCOIN whitepaper on the right side of this page. To participate in the pre-sale, click the pre-sale button on the right side. You can view the terms of service & privacy policy of BOTCOIN at the bottom right of this page. If you need assistance, click the Help Center button on the left sidebar of this page. Thank you for visiting the BOTCOIN page. Best regards from Dev: "THE ONE WHO ONCE WAS".</p>
     </div>
 
     <!-- Footer -->
@@ -330,4 +334,17 @@
     <div class="modal" id="loginModal">
         <div class="modal-content">
             <h3>Login</h3>
-            <input type="text" placeholder="Username" id
+            <input type="text" placeholder="Username" id="username">
+            <input type="password" placeholder="Password" id="password">
+            <button class="modal-close" onclick="closeModal('loginModal')">Close</button>
+        </div>
+    </div>
+
+    <script>
+        function toggleLanguageList() {
+            const languageList = document.getElementById('languageList');
+            languageList.style.display = (languageList.style.display === 'block') ? 'none' : 'block';
+        }
+    </script>
+</body>
+</
