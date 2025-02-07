@@ -305,21 +305,22 @@
     <!-- Main Content -->
     <div class="main-content">
         <h2>Welcome to BOTCOIN</h2>
+        <p>Welcome to BOTCOIN. On this page, you can participate in the BOTCOIN AIRDROP by signing up, logging in, and then clicking the AIRDROP button on the right side. You can also view the BOTCOIN whitepaper on the right side of this page. To participate in the pre-sale, click the pre-sale button on the right side. You can view the terms of service & privacy policy of BOTCOIN at the bottom right of this page. If you need assistance, click the Help Center button on the left sidebar of this page. Thank you for visiting the BOTCOIN page. Best regards from Dev: "THE ONE WHO ONCE WAS".</p>
     </div>
 
     <!-- Footer -->
     <div class="footer-right">
         <div class="language-dropdown">
-            <button onclick="toggleLanguageList()">🌍 Pilihan Bahasa</button>
+            <button onclick="toggleLanguageList()">🌍 Language Options</button>
             <ul class="language-list" id="languageList">
                 <li>🇬🇧 ENGLISH</li>
                 <li>🇷🇺 RUSSIA</li>
                 <li>🇮🇩 INDONESIA</li>
                 <li>🇨🇳 CHINA</li>
-                <li>🇸🇦 ARAB SAUDI</li>
+                <li>🇸🇦 SAUDI ARABIA</li>
                 <li>🇮🇳 INDIA</li>
                 <li>🇹🇭 THAILAND</li>
-                <li>🇵🇭 PHILIPPINE</li>
+                <li>🇵🇭 PHILIPPINES</li>
                 <li>🇻🇳 VIETNAM</li>
             </ul>
         </div>
@@ -329,62 +330,4 @@
     <div class="modal" id="loginModal">
         <div class="modal-content">
             <h3>Login</h3>
-            <input type="text" placeholder="Username" id="loginUsername">
-            <input type="password" placeholder="Password" id="loginPassword">
-            <button onclick="login()">Login</button>
-            <button class="modal-close" onclick="closeLoginModal()">Close</button>
-        </div>
-    </div>
-
-    <!-- Register Modal -->
-    <div class="modal" id="registerModal">
-        <div class="modal-content">
-            <h3>Register</h3>
-            <input type="text" placeholder="Username" id="registerUsername">
-            <input type="password" placeholder="Password" id="registerPassword">
-            <button onclick="register()">Register</button>
-            <button class="modal-close" onclick="closeRegisterModal()">Close</button>
-        </div>
-    </div>
-
-    <script>
-        function toggleLanguageList() {
-            document.getElementById("languageList").style.display = 
-                document.getElementById("languageList").style.display === "block" ? "none" : "block";
-        }
-
-        // Login Modal
-        function openLoginModal() {
-            document.getElementById('loginModal').style.display = 'block';
-        }
-
-        function closeLoginModal() {
-            document.getElementById('loginModal').style.display = 'none';
-        }
-
-        function login() {
-            const username = document.getElementById('loginUsername').value;
-            const password = document.getElementById('loginPassword').value;
-            alert(`Logged in with username: ${username}`);
-            closeLoginModal();
-        }
-
-        // Register Modal
-        function openRegisterModal() {
-            document.getElementById('registerModal').style.display = 'block';
-        }
-
-        function closeRegisterModal() {
-            document.getElementById('registerModal').style.display = 'none';
-        }
-
-        function register() {
-            const username = document.getElementById('registerUsername').value;
-            const password = document.getElementById('registerPassword').value;
-            alert(`Registered with username: ${username}`);
-            closeRegisterModal();
-        }
-    </script>
-
-</body>
-            </html>
+            <input type="text" placeholder="Username" id
