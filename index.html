@@ -257,4 +257,17 @@
     // Register Function
     function register() {
         const username = document.getElementById('regUsername').value;
-        const email = document.getElement
+        const email = document.getElementById('regEmail').value;
+        const password = document.getElementById('regPassword').value;
+        const confirmPassword = document.getElementById('regConfirmPassword').value;
+        if (password === confirmPassword) {
+            alert('Registration successful');
+            closeModal('registerModal');
+        } else {
+            alert('Passwords do not match');
+        }
+    }
+</script>
+
+</body>
+    </html>
