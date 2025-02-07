@@ -81,58 +81,6 @@
             color: black;
         }
 
-        /* Sidebar */
-        .sidebar {
-            width: 200px;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 80px 10px;
-            display: flex;
-            flex-direction: column;
-            position: fixed;
-            height: 100vh;
-            left: 0;
-        }
-
-        .sidebar button {
-            background: none;
-            border: 2px solid gold;
-            color: white;
-            font-size: 14px;
-            padding: 8px;
-            margin: 4px 0;
-            text-align: left;
-            cursor: pointer;
-            transition: 0.3s;
-            width: 100%;
-        }
-
-        .sidebar button:hover {
-            background: gold;
-            color: black;
-        }
-
-        /* Main Content */
-        .main-content {
-            margin-left: 220px;
-            padding: 90px 15px;
-            color: blue;
-            text-align: center;
-            background: rgba(0, 0, 0, 0.3); /* Mengurangi kejelasan background di konten */
-            border-radius: 10px;
-        }
-
-        /* Footer */
-        .footer-right {
-            position: fixed;
-            bottom: 10px;
-            right: 10px;
-            font-size: 12px;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-        }
-
         /* Modal */
         .modal {
             display: none;
@@ -143,14 +91,17 @@
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .modal-content {
             background-color: white;
-            margin: 10% auto;
             padding: 20px;
             width: 300px;
             border-radius: 10px;
+            text-align: center;
         }
 
         .modal-close {
@@ -167,77 +118,38 @@
             background-color: darkred;
         }
 
-        /* Responsif untuk layar kecil */
-        @media (max-width: 768px) {
-            .sidebar {
-                width: 160px;
-                padding: 70px 10px;
-            }
-
-            .main-content {
-                margin-left: 170px;
-                padding: 80px 10px;
-                font-size: 14px;
-            }
-
-            .header-title {
-                font-size: 20px;
-            }
-
-            .auth-buttons button {
-                font-size: 10px;
-                padding: 5px;
-            }
-
-            .sidebar button {
-                font-size: 12px;
-            }
-
-            .footer-right button {
-                width: 100px;
-                font-size: 10px;
-            }
+        .modal input {
+            width: 100%;
+            padding: 8px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
         }
 
-        /* Untuk layar yang lebih kecil lagi */
-        @media (max-width: 480px) {
-            .header {
-                height: 60px;
-                padding: 5px;
-            }
+        .modal button {
+            background-color: gold;
+            color: black;
+            padding: 10px;
+            border: none;
+            width: 100%;
+            border-radius: 5px;
+            cursor: pointer;
+        }
 
-            .logo {
-                width: 40px;
-                height: 40px;
-            }
+        .modal button:hover {
+            background-color: #c2a100;
+        }
 
+        .modal .register-link {
+            color: blue;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        /* Responsif untuk layar kecil */
+        @media (max-width: 768px) {
             .header-title {
-                font-size: 18px;
-            }
-
-            .sidebar {
-                width: 140px;
-                padding: 60px 5px;
-            }
-
-            .main-content {
-                margin-left: 150px;
-                padding: 70px 5px;
-                font-size: 12px;
-            }
-
-            .auth-buttons button {
-                font-size: 9px;
-                padding: 4px;
-            }
-
-            .sidebar button {
-                font-size: 10px;
-            }
-
-            .footer-right button {
-                width: 90px;
-                font-size: 9px;
+                font-size: 20px;
             }
         }
     </style>
@@ -254,44 +166,100 @@
         </div>
     </div>
 
-    <!-- Sidebar -->
-    <div class="sidebar">
-        <button>🏠 Home</button>
-        <button>📢 AIRDROP</button>
-        <button>💰 PRE SALE</button>
-        <button>📜 WHITEPAPER</button>
-        <button>❓ HELP CENTER</button>
-    </div>
-
-    <!-- Main Content -->
-    <div class="main-content">
-        <h2>Welcome to BOTCOIN</h2>
-        <p> On this page, you can participate in the BOTCOIN AIRDROP by signing up, logging in, and then clicking the AIRDROP button on the left side. You can also view the BOTCOIN whitepaper on the left side of this page. To participate in the pre-sale, click the pre-sale button on the left side. You can view the terms of service & privacy policy of BOTCOIN at the bottom right of this page. If you need assistance, click the Help Center button on the left sidebar of this page. Thank you for visiting the BOTCOIN page. Best regards from Dev: "THE ONE WHO ONCE WAS".</p>
-    </div>
-
-    <!-- Footer -->
-    <div class="footer-right">
-        <button>Terms of Service & Privacy Policy</button>
-    </div>
-
-    <!-- Login Modal -->
+    <!-- Modal Login -->
     <div class="modal" id="loginModal">
         <div class="modal-content">
             <h3>Login</h3>
             <input type="text" placeholder="Username" id="username">
             <input type="password" placeholder="Password" id="password">
-            <button class="modal-close" onclick="closeModal('loginModal')">Close</button>
+            <button onclick="login()">Login</button>
+            <button onclick="closeModal('loginModal')" class="modal-close">Close</button>
+            <div class="register-link" onclick="openRegisterModal()">Don't have an account? Register</div>
+        </div>
+    </div>
+
+    <!-- Modal Register -->
+    <div class="modal" id="registerModal">
+        <div class="modal-content">
+            <h3>Register</h3>
+            <input type="text" placeholder="Username" id="regUsername">
+            <input type="email" placeholder="Email" id="regEmail">
+            <input type="password" placeholder="Password" id="regPassword">
+            <input type="password" placeholder="Confirm Password" id="regConfirmPassword">
+            <div>
+                <label for="captcha">Captcha: </label>
+                <input type="text" id="captcha" placeholder="Enter Captcha">
+            </div>
+            <button onclick="register()">Register</button>
+            <button onclick="closeModal('registerModal')" class="modal-close">Close</button>
         </div>
     </div>
 
     <script>
+        // Modal Control
         function openLoginModal() {
-            document.getElementById('loginModal').style.display = 'block';
+            document.getElementById('loginModal').style.display = 'flex';
         }
 
         function closeModal(modalId) {
             document.getElementById(modalId).style.display = 'none';
         }
+
+        // Login Function
+        function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            if (username && password) {
+                alert('Logged in successfully');
+                closeModal('loginModal');
+            } else {
+                alert('Please fill in both fields');
+            }
+        }
+
+        // Register Function
+        function register() {
+            const username = document.getElementById('regUsername').value;
+            const email = document.getElementById('regEmail').value;
+            const password = document.getElementById('regPassword').value;
+            const confirmPassword = document.getElementById('regConfirmPassword').value;
+            const captcha = document.getElementById('captcha').value;
+
+            if (username && email && password && confirmPassword && captcha) {
+                if (password === confirmPassword) {
+                    // Google Spreadsheet API Call (for illustration purposes)
+                    alert('Registration successful');
+                    closeModal('registerModal');
+
+                    // Send data to Google Spreadsheet using Apps Script
+                    fetch('https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec', {
+                        method: 'POST',
+                        body: JSON.stringify({
+                            username: username,
+                            email: email,
+                            password: password,
+                        }),
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                    }).then(response => response.json())
+                    .then(data => {
+                        console.log(data);
+                    }).catch(error => console.error('Error:', error));
+
+                } else {
+                    alert('Passwords do not match');
+                }
+            } else {
+                alert('Please fill in all fields');
+            }
+        }
+
+        // Register Modal Control
+        function openRegisterModal() {
+            document.getElementById('registerModal').style.display = 'flex';
+        }
     </script>
+
 </body>
-    </html>
+        </html>
