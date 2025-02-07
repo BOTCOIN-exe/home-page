@@ -16,7 +16,6 @@
             background: url('https://raw.githubusercontent.com/BOTCOIN-exe/logo-botcoin/refs/heads/main/Screenshot_2025-02-07-14-32-59-88_99c04817c0de5652397fc8b56c3b3817.jpg') no-repeat center center fixed;
             background-size: cover;
             position: relative;
-            margin-top: 70px; /* Menambahkan jarak sesuai dengan tinggi header */
         }
 
         /* Overlay untuk mengurangi kejelasan background dan blur */
@@ -153,12 +152,13 @@
             }
         }
 
+        /* Jarak antara header dan konten */
         .content {
             padding: 20px;
-            padding-top: 100px; /* Menambahkan jarak dari header */
             color: white;
             font-size: 16px;
             line-height: 1.6;
+            margin-top: 90px; /* Menambahkan margin untuk memberi jarak antara header dan konten */
         }
 
         .content h2 {
@@ -257,10 +257,4 @@
     // Register Function
     function register() {
         const username = document.getElementById('regUsername').value;
-        const email = document.getElementById('regEmail').value;
-        const password = document.getElementById('regPassword').value;
-        const confirmPassword = document.getElementById('regConfirmPassword').value;
-
-        if (username && email && password && confirmPassword) {
-            if (password === confirmPassword) {
-                alert('Registration successful
+        const email = document.getElement
