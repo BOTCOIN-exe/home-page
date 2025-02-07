@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BOTCOIN - Halaman Utama</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: url('https://raw.githubusercontent.com/BOTCOIN-exe/Botcoin-whitepaper/refs/heads/main/IMG_20250201_082442.png') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+
+        .sidebar {
+            width: 250px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            border-right: 2px solid white;
+        }
+
+        .sidebar a {
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            padding: 10px 0;
+            display: block;
+        }
+
+        .sidebar a:hover {
+            color: gold;
+        }
+
+        .main-content {
+            flex-grow: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 2px solid white;
+            padding-bottom: 10px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            width: 60px;
+            height: 60px;
+            margin-right: 10px;
+        }
+
+        .header-title {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .auth-buttons {
+            font-size: 16px;
+        }
+
+        .auth-buttons a {
+            color: white;
+            text-decoration: none;
+            margin-left: 15px;
+        }
+
+        .auth-buttons a:hover {
+            color: gold;
+        }
+
+        .content {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-size: 14px;
+        }
+
+        .footer a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            color: gold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar Menu -->
+        <div class="sidebar">
+            <a href="login.html"><strong>🏠 Home</strong></a>
+            <a href="login.html">📢 AIRDROP</a>
+            <a href="login.html">💰 PRE SALE</a>
+            <a href="whitepaper.html">📜 WHITEPAPER</a>
+            <a href="login.html">❓ HELP CENTER</a>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <div class="header">
+                <div class="logo">
+                    <img src="https://raw.githubusercontent.com/BOTCOIN-exe/Botcoin-whitepaper/refs/heads/main/IMG_20250201_082442.png" alt="BOTCOIN Logo">
+                    <div class="header-title">BOTCOIN</div>
+                </div>
+                <div class="auth-buttons">
+                    <a href="login.html">Login</a> | 
+                    <a href="register.html">Register</a>
+                </div>
+            </div>
+
+            <!-- Penjelasan BOTCOIN -->
+            <div class="content">
+                <h2>Selamat Datang di BOTCOIN</h2>
+                <p>
+                    BOTCOIN adalah mata uang kripto revolusioner yang bertujuan untuk menciptakan sistem penambangan berbasis komunitas yang adil dan transparan.
+                    Bergabunglah dengan komunitas kami dan mulai eksplorasi dunia BOTCOIN hari ini!
+                </p>
+            </div>
+
+            <!-- Footer -->
+            <div class="footer">
+                <a href="terms-of-service.html">Terms of Service</a>
+            </div>
+        </div>
+    </div>
+</body>
+  </html>
