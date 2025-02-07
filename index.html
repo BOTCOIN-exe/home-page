@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BOTCOIN - Halaman Utama</title>
+    <title>BOTCOIN - Homepage</title>
     <style>
         * {
             margin: 0;
@@ -15,7 +15,7 @@
         body {
             background: url('https://raw.githubusercontent.com/BOTCOIN-exe/Botcoin-whitepaper/refs/heads/main/IMG_20250201_082442.png') no-repeat center center fixed;
             background-size: cover;
-            color: white;
+            color: #FFD700; /* Warna emas agar mudah dibaca */
         }
 
         .container {
@@ -23,6 +23,7 @@
             height: 100vh;
         }
 
+        /* Sidebar */
         .sidebar {
             width: 250px;
             background: rgba(0, 0, 0, 0.7);
@@ -30,7 +31,7 @@
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
-            border-right: 2px solid white;
+            position: relative;
         }
 
         .sidebar a {
@@ -45,6 +46,18 @@
             color: gold;
         }
 
+        /* Garis pemisah vertikal */
+        .sidebar::after {
+            content: "";
+            position: absolute;
+            top: 70px; /* Mulai dari bawah judul */
+            bottom: 0;
+            right: 0;
+            width: 2px;
+            background-color: white;
+        }
+
+        /* Konten utama */
         .main-content {
             flex-grow: 1;
             padding: 20px;
@@ -52,6 +65,7 @@
             flex-direction: column;
         }
 
+        /* Header */
         .header {
             display: flex;
             align-items: center;
@@ -90,11 +104,13 @@
             color: gold;
         }
 
+        /* Konten utama BOTCOIN */
         .content {
             margin-top: 20px;
             font-size: 18px;
         }
 
+        /* Footer */
         .footer {
             position: absolute;
             bottom: 10px;
@@ -139,10 +155,12 @@
 
             <!-- Penjelasan BOTCOIN -->
             <div class="content">
-                <h2>Selamat Datang di BOTCOIN</h2>
+                <h2>Welcome to BOTCOIN</h2>
                 <p>
-                    BOTCOIN adalah mata uang kripto revolusioner yang bertujuan untuk menciptakan sistem penambangan berbasis komunitas yang adil dan transparan.
-                    Bergabunglah dengan komunitas kami dan mulai eksplorasi dunia BOTCOIN hari ini!
+                    BOTCOIN is a revolutionary cryptocurrency designed to create a fair and transparent community-based mining system.
+                    Unlike traditional cryptocurrencies, BOTCOIN ensures equal opportunities for everyone to participate and earn rewards.
+                    Our mission is to build a decentralized economy where users can mine, trade, and utilize BOTCOIN in real-world applications.
+                    Join our growing community and be part of the future of digital finance!
                 </p>
             </div>
 
@@ -153,4 +171,4 @@
         </div>
     </div>
 </body>
-  </html>
+                        </html>
