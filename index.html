@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BOTCOIN - Homepage</title>
+    <title>Game Mining BOTCOIN</title>
     <style>
         * {
             margin: 0;
@@ -17,6 +18,7 @@
             background: url('https://raw.githubusercontent.com/BOTCOIN-exe/logo-botcoin/refs/heads/main/Screenshot_2025-02-07-14-32-59-88_99c04817c0de5652397fc8b56c3b3817.jpg') no-repeat center center fixed;
             background-size: cover;
             position: relative;
+            color: white; /* Agar teks jelas di atas background */
         }
 
         /* Overlay untuk mengurangi kejelasan background dan blur */
@@ -27,7 +29,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.7); /* Memberikan layer semi-transparan */
+            background: rgba(0, 0, 0, 0.6); /* Memberikan layer semi-transparan untuk menggelapkan background */
             filter: blur(8px); /* Mengaburkan background */
             z-index: -1;
         }
@@ -58,7 +60,7 @@
             font-weight: bold;
             color: gold;
             text-transform: uppercase;
-            text-shadow: 3px 3px 10px rgba(255, 215, 0, 0.8);
+            text-shadow: 3px 3px 10px rgba(255, 215, 0, 0.8); /* Memberikan efek bayangan emas pada teks */
         }
 
         .auth-buttons {
@@ -154,107 +156,26 @@
         }
     </style>
 </head>
-<body>
 
-    <!-- Header -->
+<body>
     <div class="header">
-        <img src="https://raw.githubusercontent.com/BOTCOIN-exe/logo-botcoin/refs/heads/main/Screenshot_2025-02-07-14-32-59-88_99c04817c0de5652397fc8b56c3b3817.jpg" alt="BOTCOIN Logo" class="logo">
-        <div class="header-title">BOTCOIN</div>
+        <img class="logo" src="https://raw.githubusercontent.com/BOTCOIN-exe/logo-botcoin/refs/heads/main/BOTCOIN-logo.png" alt="Logo BOTCOIN">
+        <div class="header-title">Game Mining BOTCOIN</div>
         <div class="auth-buttons">
-            <button onclick="openLoginModal()">Login</button>
-            <button onclick="openRegisterModal()">Register</button>
+            <button>Login</button>
+            <button>Register</button>
         </div>
     </div>
 
-    <!-- Modal Login -->
-    <div class="modal" id="loginModal">
+    <div class="modal">
         <div class="modal-content">
-            <h3>Login</h3>
+            <h2>Login</h2>
             <input type="text" placeholder="Username" id="username">
             <input type="password" placeholder="Password" id="password">
-            <button onclick="login()">Login</button>
-            <button onclick="closeModal('loginModal')" class="modal-close">Close</button>
-            <div class="register-link" onclick="openRegisterModal()">Don't have an account? Register</div>
+            <button>Login</button>
+            <button class="modal-close">Close</button>
         </div>
     </div>
-
-    <!-- Modal Register -->
-    <div class="modal" id="registerModal">
-        <div class="modal-content">
-            <h3>Register</h3>
-            <input type="text" placeholder="Username" id="regUsername">
-            <input type="email" placeholder="Email" id="regEmail">
-            <input type="password" placeholder="Password" id="regPassword">
-            <input type="password" placeholder="Confirm Password" id="regConfirmPassword">
-            <button onclick="register()">Register</button>
-            <button onclick="closeModal('registerModal')" class="modal-close">Close</button>
-        </div>
-    </div>
-
-    <script>
-        // Modal Control
-        function openLoginModal() {
-            document.getElementById('loginModal').style.display = 'flex';
-        }
-
-        function closeModal(modalId) {
-            document.getElementById(modalId).style.display = 'none';
-        }
-
-        // Login Function
-        function login() {
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            if (username && password) {
-                alert('Logged in successfully');
-                closeModal('loginModal');
-            } else {
-                alert('Please fill in both fields');
-            }
-        }
-
-        // Register Function
-        function register() {
-            const username = document.getElementById('regUsername').value;
-            const email = document.getElementById('regEmail').value;
-            const password = document.getElementById('regPassword').value;
-            const confirmPassword = document.getElementById('regConfirmPassword').value;
-
-            if (username && email && password && confirmPassword) {
-                if (password === confirmPassword) {
-                    // Google Spreadsheet API Call (for illustration purposes)
-                    alert('Registration successful');
-                    closeModal('registerModal');
-
-                    // Send data to Google Spreadsheet using Apps Script
-                    fetch('https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec', {
-                        method: 'POST',
-                        body: JSON.stringify({
-                            username: username,
-                            email: email,
-                            password: password,
-                        }),
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                    }).then(response => response.json())
-                    .then(data => {
-                        console.log(data);
-                    }).catch(error => console.error('Error:', error));
-
-                } else {
-                    alert('Passwords do not match');
-                }
-            } else {
-                alert('Please fill in all fields');
-            }
-        }
-
-        // Register Modal Control
-        function openRegisterModal() {
-            document.getElementById('registerModal').style.display = 'flex';
-        }
-    </script>
-
 </body>
-                </html>
+
+</html>
