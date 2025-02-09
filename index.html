@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BOTCOIN - Homepage</title>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <!-- Font Awesome untuk ikon mata -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
     <style>
         * {
             margin: 0;
@@ -13,14 +17,16 @@
             font-family: Arial, sans-serif;
         }
 
-        /* Background with blur effect */
+        /* Background dengan efek blur */
         body {
             background: url('https://raw.githubusercontent.com/BOTCOIN-exe/logo-botcoin/refs/heads/main/Screenshot_2025-02-07-14-32-59-88_99c04817c0de5652397fc8b56c3b3817.jpg') no-repeat center center fixed;
             background-size: cover;
-            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        /* Overlay blur effect */
         body::before {
             content: "";
             position: fixed;
@@ -44,7 +50,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 10px;
+            padding: 0 20px;
             border-bottom: 2px solid gold;
             z-index: 1000;
         }
@@ -55,17 +61,22 @@
         }
 
         .header-title {
-            font-size: 24px;
+            font-size: 20px;
             font-weight: bold;
             color: gold;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 10px;
         }
 
         .auth-buttons button {
             background: none;
             border: 2px solid gold;
             color: white;
-            font-size: 12px;
-            padding: 6px 8px;
+            font-size: 14px;
+            padding: 8px 12px;
             cursor: pointer;
             transition: 0.3s;
         }
@@ -73,52 +84,6 @@
         .auth-buttons button:hover {
             background: gold;
             color: black;
-        }
-
-        /* Main content */
-        .content {
-            padding: 40px 20px;
-            margin-top: 90px;
-            text-align: center;
-            color: white;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .content h2 {
-            font-size: 28px;
-            color: gold;
-            margin-bottom: 15px;
-        }
-
-        .content p {
-            font-size: 16px;
-            line-height: 1.8;
-            margin-bottom: 20px;
-        }
-
-        /* Improved text layout */
-        .features {
-            text-align: left;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            border-radius: 10px;
-        }
-
-        .features h3 {
-            color: gold;
-            margin-bottom: 10px;
-        }
-
-        .features ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        .features li {
-            margin-bottom: 10px;
-            font-size: 15px;
         }
 
         /* Modal */
@@ -142,6 +107,7 @@
             border-radius: 10px;
             text-align: center;
             color: black;
+            position: relative;
         }
 
         .modal input {
@@ -166,18 +132,32 @@
             background-color: #c2a100;
         }
 
-        .modal-close {
-            background-color: red;
-            color: white;
-            padding: 5px 10px;
-            width: 100%;
-            border: none;
-            margin-top: 10px;
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 20px;
+            font-weight: bold;
+            color: red;
+            cursor: pointer;
         }
 
-        .register-link {
-            color: blue;
-            margin-top: 10px;
+        /* Password Input dengan Ikon Mata */
+        .password-container {
+            position: relative;
+            width: 100%;
+        }
+
+        .password-container input {
+            width: 100%;
+            padding-right: 40px;
+        }
+
+        .password-container i {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
             cursor: pointer;
         }
 
@@ -187,52 +167,25 @@
 
 <!-- Header -->
 <div class="header">
-    <img src="https://raw.githubusercontent.com/BOTCOIN-exe/logo-botcoin/refs/heads/main/Screenshot_2025-02-07-14-32-59-88_99c04817c0de5652397fc8b56c3b3817.jpg" alt="BOTCOIN Logo" class="logo">
+    <img src="https://raw.githubusercontent.com/BOTCOIN-exe/logo-botcoin/refs/heads/main/Screenshot_2025-02-07-14-32-59-88_99c04817c0de5652397fc8b56c3b3817.jpg" alt="Botcoin Logo" class="logo">
     <div class="header-title">BOTCOIN</div>
     <div class="auth-buttons">
         <button onclick="openModal('loginModal')">Login</button>
-        <button onclick="openModal('registerModal')">Register</button>
+        <button onclick="openModal('registerModal')">Register</button> 
     </div>
 </div>
 
-<!-- Content -->
-<div class="content">
-    <h2>Welcome to BOTCOIN</h2>
-    <p>Botcoin is a platform that provides information and services related to the Botcoin cryptocurrency project.</p>
-
-    <div class="features">
-        <h3>Main Features:</h3>
-        <ul>
-            <li><strong>🔐 Login:</strong> Access your account with an email and password authentication system.</li>
-            <li><strong>📝 Register:</strong> Create a new account, with data securely stored in Supabase.</li>
-            <li><strong>📄 Whitepaper:</strong> An official document explaining Botcoin's vision, mission, and technology.</li>
-            <li><strong>🚪 Log Out:</strong> Securely log out of your account.</li>
-            <li><strong>📜 Terms of Service:</strong> The terms and conditions users must agree to before using the platform.</li>
-            <li><strong>🔒 Privacy Policy:</strong> Information on how user data is collected and used.</li>
-            <li><strong>🎁 Airdrop:</strong> A program where users can receive free Botcoin.</li>
-            <li><strong>💰 Pre Sale:</strong> Purchase Botcoin at a lower price before its official release.</li>
-            <li><strong>❤️ Donation:</strong> An option to support the project through donations.</li>
-            <li><strong>❓ Help Center:</strong> A support center for users who need assistance.</li>
-        </ul>
-    </div>
-    <!-- Modal Login -->
 <!-- Modal Login -->
 <div class="modal" id="loginModal">
     <div class="modal-content">
         <span class="close-btn" onclick="closeModal('loginModal')">&times;</span>
         <h3>Login</h3>
         <input type="email" placeholder="Email" id="loginEmail">
-        
-        <!-- Input Password dengan Icon Mata -->
         <div class="password-container">
-            <input type="password" placeholder="Password" id="loginPassword">
-            <span class="toggle-password" onclick="togglePassword('loginPassword')">
-                👁️
-            </span>
+            <input type="password" id="loginPassword" placeholder="Password">
+            <i class="fa fa-eye" onclick="togglePassword('loginPassword', this)"></i>
         </div>
-
         <button onclick="login()">Login</button>
-        <div class="register-link" onclick="openModal('registerModal')">Don't have an account? Register</div>
     </div>
 </div>
 
@@ -241,167 +194,92 @@
     <div class="modal-content">
         <span class="close-btn" onclick="closeModal('registerModal')">&times;</span>
         <h3>Register</h3>
+
         <input type="text" placeholder="Username" id="regUsername">
+
         <input type="email" placeholder="Email" id="regEmail">
-        
-        <!-- Input Password dengan Icon Mata -->
+
         <div class="password-container">
-            <input type="password" placeholder="Password" id="regPassword">
-            <span class="toggle-password" onclick="togglePassword('regPassword')">
-                👁️
-            </span>
+            <input type="password" id="regPassword" placeholder="Password">
+            <i class="fa fa-eye" onclick="togglePassword('regPassword', this)"></i>
         </div>
-        
-        <!-- Input Confirm Password dengan Icon Mata -->
+
         <div class="password-container">
-            <input type="password" placeholder="Confirm Password" id="regConfirmPassword">
-            <span class="toggle-password" onclick="togglePassword('regConfirmPassword')">
-                👁️
-            </span>
+            <input type="password" id="confirmPassword" placeholder="Confirm Password">
+            <i class="fa fa-eye" onclick="togglePassword('confirmPassword', this)"></i>
         </div>
 
         <button onclick="register()">Register</button>
     </div>
 </div>
+<div style="height: 80px;"></div>
+<section id="botcoin-info" style="padding: 20px; color: white; text-align: center;">
+    <h2 style="color: gold;">Botcoin Website</h2>
+    <p>The Botcoin website is a platform designed to provide information and services related to the Botcoin cryptocurrency project.</p>
 
-<style>
-    /* Style Modal */
-    .modal-content {
-        position: relative;
-        background-color: white;
-        padding: 20px;
-        width: 300px;
-        border-radius: 10px;
-        text-align: center;
-        color: black;
-    }
+    <h3>Main Features</h3>
+    <ul style="list-style: none; padding: 0; text-align: left; max-width: 600px; margin: 0 auto;">
+        <li><strong>1. Login</strong><br>A page for registered users to access their accounts. Uses an authentication system based on email and password.</li><br>
+        <li><strong>2. Register</strong><br>A registration form for new users to create an account. User data will be securely stored in a database (planned to use Supabase).</li><br>
+        <li><strong>3. Whitepaper</strong><br>An official document that explains the vision, mission, and technology behind Botcoin. Contains technical information and project strategy.</li><br>
+        <li><strong>4. Log Out</strong><br>An option for users to securely log out of their accounts.</li><br>
+        <li><strong>5. Terms of Service</strong><br>The terms and conditions governing the use of the Botcoin platform. Users must agree to them before using the services.</li><br>
+        <li><strong>6. Privacy Policy</strong><br>A policy explaining how user data is collected, stored, and used.</li><br>
+        <li><strong>7. Airdrop</strong><br>A program that allows users to receive free Botcoin as part of promotion and early adoption. Usually requires participation, such as sharing information about Botcoin.</li><br>
+        <li><strong>8. Pre Sale</strong><br>The initial sale phase of Botcoin before its official launch. Users can purchase Botcoin at a lower price than the market price upon listing.</li><br>
+        <li><strong>9. Donation</strong><br>An option for users who want to support the project through donations. Can be in the form of cryptocurrency or other payment methods.</li><br>
+        <li><strong>10. Help Center</strong><br>A support center for users experiencing issues or having questions about Botcoin. Includes FAQs, guides, and support contact information.</li>
+    </ul>
 
-    /* Style Tombol "X" */
-    .close-btn {
-        position: absolute;
-        top: 10px;
-        right: 15px;
-        font-size: 20px;
-        cursor: pointer;
-        color: black;
-        background: none;
-        border: none;
-    }
-
-    .close-btn:hover {
-        color: red;
-    }
-
-    /* Style untuk Input Password */
-    .password-container {
-        position: relative;
-        display: flex;
-        align-items: center;
-        margin-bottom: 10px;
-    }
-
-    .password-container input {
-        width: 100%;
-        padding-right: 30px;
-    }
-
-    .toggle-password {
-        position: absolute;
-        right: 10px;
-        cursor: pointer;
-        font-size: 18px;
-    }
-</style>
-
-<script>
-    function togglePassword(inputId) {
-        const passwordField = document.getElementById(inputId);
-        if (passwordField.type === "password") {
-            passwordField.type = "text";
-        } else {
-            passwordField.type = "password";
-        }
-    }
-</script>
-<style>
-    /* Modal Styling */
-    .modal {
-        display: none;
-        position: fixed;
-        z-index: 1000;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.7);
-        justify-content: center;
-        align-items: center;
-    }
-
-    .modal-content {
-        background-color: white;
-        padding: 20px;
-        width: 300px;
-        border-radius: 10px;
-        text-align: center;
-        color: black;
-        position: relative;
-    }
-
-    .modal input {
-        width: 100%;
-        padding: 8px;
-        margin: 10px 0;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-    }
-
-    .modal button {
-        background-color: gold;
-        color: black;
-        padding: 10px;
-        border: none;
-        width: 100%;
-        border-radius: 5px;
-        cursor: pointer;
-        margin-bottom: 10px;
-    }
-
-    .modal button:hover {
-        background-color: #c2a100;
-    }
-
-    .close-btn {
-        position: absolute;
-        top: 10px;
-        right: 15px;
-        font-size: 20px;
-        font-weight: bold;
-        color: red;
-        cursor: pointer;
-    }
-</style>
-
-<script>
-    function openModal(id) {
-        document.getElementById(id).style.display = 'flex';
-    }
-
-    function closeModal(id) {
-        document.getElementById(id).style.display = 'none';
-    }
-</script>
+    <h3 style="margin-top: 20px;">Conclusion</h3>
+    <p> The Botcoin website is not just an information hub but also a place for the community to engage in its ecosystem. With features that support security and transparency, Botcoin aims to be a trustworthy project for users and investors.</p>
+</section>
+    </div>
 </div>
 
 <script>
+    const supabase = supabase.createClient("https://ceoprfmktepicydftxjd.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNlb3ByZm1rdGVwaWN5ZGZ0eGpkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzkwNzQzMzgsImV4cCI6MjA1NDY1MDMzOH0.g7g4R-UotgVwYo0h2sGPbaVBBd2Rn0fZPP52PpJEQu0");
+
     function openModal(id) {
         document.getElementById(id).style.display = 'flex';
     }
 
     function closeModal(id) {
         document.getElementById(id).style.display = 'none';
+    }
+
+    function togglePassword(inputId, icon) {
+        let input = document.getElementById(inputId);
+        input.type = input.type === "password" ? "text" : "password";
+        icon.classList.toggle("fa-eye-slash");
+    }
+
+    async function register() {
+        const email = document.getElementById("regEmail").value;
+        const password = document.getElementById("regPassword").value;
+
+        let { error } = await supabase.auth.signUp({ email, password });
+
+        if (error) {
+            alert("Register gagal: " + error.message);
+        } else {
+            alert("Registrasi berhasil, cek email untuk verifikasi!");
+        }
+    }
+
+    async function login() {
+        const email = document.getElementById("loginEmail").value;
+        const password = document.getElementById("loginPassword").value;
+
+        let { error } = await supabase.auth.signInWithPassword({ email, password });
+
+        if (error) {
+            alert("Login gagal: " + error.message);
+        } else {
+            alert("Login berhasil!");
+        }
     }
 </script>
 
 </body>
-    </html>
+                                                                                                                                                                                                  </html>
