@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BOTCOIN - Homepage</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         * {
             margin: 0;
@@ -11,23 +12,24 @@
             box-sizing: border-box;
             font-family: Arial, sans-serif;
         }
-        /* Body background dengan blur */
+
+        /* Background with blur effect */
         body {
             background: url('https://raw.githubusercontent.com/BOTCOIN-exe/logo-botcoin/refs/heads/main/Screenshot_2025-02-07-14-32-59-88_99c04817c0de5652397fc8b56c3b3817.jpg') no-repeat center center fixed;
             background-size: cover;
             position: relative;
         }
 
-        /* Overlay untuk mengurangi kejelasan background dan blur */
+        /* Overlay blur effect */
         body::before {
             content: "";
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            filter: blur(8px); /* Mengaburkan background */
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
             z-index: -1;
         }
 
@@ -56,13 +58,6 @@
             font-size: 24px;
             font-weight: bold;
             color: gold;
-            text-transform: uppercase;
-            text-shadow: 3px 3px 10px rgba(255, 215, 0, 0.8);
-        }
-
-        .auth-buttons {
-            display: flex;
-            gap: 5px;
         }
 
         .auth-buttons button {
@@ -80,6 +75,52 @@
             color: black;
         }
 
+        /* Main content */
+        .content {
+            padding: 40px 20px;
+            margin-top: 90px;
+            text-align: center;
+            color: white;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .content h2 {
+            font-size: 28px;
+            color: gold;
+            margin-bottom: 15px;
+        }
+
+        .content p {
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        /* Improved text layout */
+        .features {
+            text-align: left;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .features h3 {
+            color: gold;
+            margin-bottom: 10px;
+        }
+
+        .features ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .features li {
+            margin-bottom: 10px;
+            font-size: 15px;
+        }
+
         /* Modal */
         .modal {
             display: none;
@@ -90,7 +131,6 @@
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.7);
-            display: flex;
             justify-content: center;
             align-items: center;
         }
@@ -101,20 +141,7 @@
             width: 300px;
             border-radius: 10px;
             text-align: center;
-        }
-
-        .modal-close {
-            background-color: red;
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            cursor: pointer;
-            width: 100%;
-            margin-top: 10px;
-        }
-
-        .modal-close:hover {
-            background-color: darkred;
+            color: black;
         }
 
         .modal input {
@@ -139,32 +166,21 @@
             background-color: #c2a100;
         }
 
-        .modal .register-link {
+        .modal-close {
+            background-color: red;
+            color: white;
+            padding: 5px 10px;
+            width: 100%;
+            border: none;
+            margin-top: 10px;
+        }
+
+        .register-link {
             color: blue;
             margin-top: 10px;
             cursor: pointer;
         }
 
-        /* Responsif untuk layar kecil */
-        @media (max-width: 768px) {
-            .header-title {
-                font-size: 20px;
-            }
-        }
-
-        /* Jarak antara header dan konten */
-        .content {
-            padding: 20px;
-            color: white;
-            font-size: 16px;
-            line-height: 1.6;
-            margin-top: 90px; /* Menambahkan margin untuk memberi jarak antara header dan konten */
-        }
-
-        .content h2 {
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
     </style>
 </head>
 <body>
@@ -174,98 +190,216 @@
     <img src="https://raw.githubusercontent.com/BOTCOIN-exe/logo-botcoin/refs/heads/main/Screenshot_2025-02-07-14-32-59-88_99c04817c0de5652397fc8b56c3b3817.jpg" alt="BOTCOIN Logo" class="logo">
     <div class="header-title">BOTCOIN</div>
     <div class="auth-buttons">
-        <button onclick="openLoginModal()">Login</button>
-        <button onclick="openRegisterModal()">Register</button>
+        <button onclick="openModal('loginModal')">Login</button>
+        <button onclick="openModal('registerModal')">Register</button>
     </div>
 </div>
 
-<!-- Content Section -->
+<!-- Content -->
 <div class="content">
     <h2>Welcome to BOTCOIN</h2>
-    <p>
-        BOTCOIN is a cryptocurrency designed to provide users with the opportunity to earn airdrop points by completing various tasks. Here is an overview of the main features of BOTCOIN:
-    </p>
-    <ul>
-        <li><strong>Presale:</strong> BOTCOIN will have a presale to offer early access to investors with a more affordable token price.</li>
-        <li><strong>Airdrop:</strong> Users can participate in the airdrop by completing specific tasks such as following BOTCOIN's social media accounts, sharing information about BOTCOIN, or participating in community activities. Users earn points based on their activity.</li>
-        <li><strong>Whitepaper:</strong> The BOTCOIN whitepaper provides an in-depth explanation of the project's vision, technology, and tokenomics details. It aims to provide transparency to all participants and investors.</li>
-        <li><strong>Help Center:</strong> A help center will be available to assist users with any aspect of using the BOTCOIN platform, including how to participate in the airdrop and how to earn tokens.</li>
-        <li><strong>Terms of Service & Privacy:</strong> BOTCOIN adheres to strict rules and privacy policies to ensure the security of user data and transparency in managing personal information.</li>
-    </ul>
-    <h3>How to Participate in the Airdrop:</h3>
-    <ol>
-        <li><strong>Sign Up:</strong> Register on the official BOTCOIN website by entering your username, email, and password.</li>
-        <li><strong>Login:</strong> After registration, log in using your username and password.</li>
-        <li><strong>Complete Tasks:</strong> Complete various tasks to earn airdrop points, which can later be converted into BOTCOIN tokens.</li>
-        <li><strong>Airdrop Points:</strong> Points earned from completing tasks can be converted into BOTCOIN tokens according to the platform's system.</li>
-    </ol>
-</div>
+    <p>Botcoin is a platform that provides information and services related to the Botcoin cryptocurrency project.</p>
 
+    <div class="features">
+        <h3>Main Features:</h3>
+        <ul>
+            <li><strong>🔐 Login:</strong> Access your account with an email and password authentication system.</li>
+            <li><strong>📝 Register:</strong> Create a new account, with data securely stored in Supabase.</li>
+            <li><strong>📄 Whitepaper:</strong> An official document explaining Botcoin's vision, mission, and technology.</li>
+            <li><strong>🚪 Log Out:</strong> Securely log out of your account.</li>
+            <li><strong>📜 Terms of Service:</strong> The terms and conditions users must agree to before using the platform.</li>
+            <li><strong>🔒 Privacy Policy:</strong> Information on how user data is collected and used.</li>
+            <li><strong>🎁 Airdrop:</strong> A program where users can receive free Botcoin.</li>
+            <li><strong>💰 Pre Sale:</strong> Purchase Botcoin at a lower price before its official release.</li>
+            <li><strong>❤️ Donation:</strong> An option to support the project through donations.</li>
+            <li><strong>❓ Help Center:</strong> A support center for users who need assistance.</li>
+        </ul>
+    </div>
+    <!-- Modal Login -->
 <!-- Modal Login -->
 <div class="modal" id="loginModal">
     <div class="modal-content">
+        <span class="close-btn" onclick="closeModal('loginModal')">&times;</span>
         <h3>Login</h3>
-        <input type="text" placeholder="Username" id="username">
-        <input type="password" placeholder="Password" id="password">
+        <input type="email" placeholder="Email" id="loginEmail">
+        
+        <!-- Input Password dengan Icon Mata -->
+        <div class="password-container">
+            <input type="password" placeholder="Password" id="loginPassword">
+            <span class="toggle-password" onclick="togglePassword('loginPassword')">
+                👁️
+            </span>
+        </div>
+
         <button onclick="login()">Login</button>
-        <button onclick="closeModal('loginModal')" class="modal-close">Close</button>
-        <div class="register-link" onclick="openRegisterModal()">Don't have an account? Register</div>
+        <div class="register-link" onclick="openModal('registerModal')">Don't have an account? Register</div>
     </div>
 </div>
 
 <!-- Modal Register -->
 <div class="modal" id="registerModal">
     <div class="modal-content">
+        <span class="close-btn" onclick="closeModal('registerModal')">&times;</span>
         <h3>Register</h3>
         <input type="text" placeholder="Username" id="regUsername">
         <input type="email" placeholder="Email" id="regEmail">
-        <input type="password" placeholder="Password" id="regPassword">
-        <input type="password" placeholder="Confirm Password" id="regConfirmPassword">
+        
+        <!-- Input Password dengan Icon Mata -->
+        <div class="password-container">
+            <input type="password" placeholder="Password" id="regPassword">
+            <span class="toggle-password" onclick="togglePassword('regPassword')">
+                👁️
+            </span>
+        </div>
+        
+        <!-- Input Confirm Password dengan Icon Mata -->
+        <div class="password-container">
+            <input type="password" placeholder="Confirm Password" id="regConfirmPassword">
+            <span class="toggle-password" onclick="togglePassword('regConfirmPassword')">
+                👁️
+            </span>
+        </div>
+
         <button onclick="register()">Register</button>
-        <button onclick="closeModal('registerModal')" class="modal-close">Close</button>
     </div>
 </div>
 
+<style>
+    /* Style Modal */
+    .modal-content {
+        position: relative;
+        background-color: white;
+        padding: 20px;
+        width: 300px;
+        border-radius: 10px;
+        text-align: center;
+        color: black;
+    }
+
+    /* Style Tombol "X" */
+    .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        font-size: 20px;
+        cursor: pointer;
+        color: black;
+        background: none;
+        border: none;
+    }
+
+    .close-btn:hover {
+        color: red;
+    }
+
+    /* Style untuk Input Password */
+    .password-container {
+        position: relative;
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    .password-container input {
+        width: 100%;
+        padding-right: 30px;
+    }
+
+    .toggle-password {
+        position: absolute;
+        right: 10px;
+        cursor: pointer;
+        font-size: 18px;
+    }
+</style>
+
 <script>
-    // Modal Control
-    function openLoginModal() {
-        document.getElementById('loginModal').style.display = 'flex';
-        document.getElementById('registerModal').style.display = 'none'; // Close the register modal if open
-    }
-
-    function openRegisterModal() {
-        document.getElementById('registerModal').style.display = 'flex';
-        document.getElementById('loginModal').style.display = 'none'; // Close the login modal if open
-    }
-
-    function closeModal(modalId) {
-        document.getElementById(modalId).style.display = 'none';
-    }
-
-    // Login Function
-    function login() {
-        const username = document.getElementById('username').value;
-        const password = document.getElementById('password').value;
-        if (username && password) {
-            alert('Logged in successfully');
-            closeModal('loginModal');
+    function togglePassword(inputId) {
+        const passwordField = document.getElementById(inputId);
+        if (passwordField.type === "password") {
+            passwordField.type = "text";
         } else {
-            alert('Please fill in both fields');
+            passwordField.type = "password";
         }
     }
+</script>
+<style>
+    /* Modal Styling */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        justify-content: center;
+        align-items: center;
+    }
 
-    // Register Function
-    function register() {
-        const username = document.getElementById('regUsername').value;
-        const email = document.getElementById('regEmail').value;
-        const password = document.getElementById('regPassword').value;
-        const confirmPassword = document.getElementById('regConfirmPassword').value;
-        if (password === confirmPassword) {
-            alert('Registration successful');
-            closeModal('registerModal');
-        } else {
-            alert('Passwords do not match');
-        }
+    .modal-content {
+        background-color: white;
+        padding: 20px;
+        width: 300px;
+        border-radius: 10px;
+        text-align: center;
+        color: black;
+        position: relative;
+    }
+
+    .modal input {
+        width: 100%;
+        padding: 8px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .modal button {
+        background-color: gold;
+        color: black;
+        padding: 10px;
+        border: none;
+        width: 100%;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-bottom: 10px;
+    }
+
+    .modal button:hover {
+        background-color: #c2a100;
+    }
+
+    .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        font-size: 20px;
+        font-weight: bold;
+        color: red;
+        cursor: pointer;
+    }
+</style>
+
+<script>
+    function openModal(id) {
+        document.getElementById(id).style.display = 'flex';
+    }
+
+    function closeModal(id) {
+        document.getElementById(id).style.display = 'none';
+    }
+</script>
+</div>
+
+<script>
+    function openModal(id) {
+        document.getElementById(id).style.display = 'flex';
+    }
+
+    function closeModal(id) {
+        document.getElementById(id).style.display = 'none';
     }
 </script>
 
