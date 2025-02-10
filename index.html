@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BOTCOIN - Homepage</title>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    
-    <!-- Font Awesome untuk ikon mata -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
     <style>
@@ -17,7 +16,6 @@
             font-family: Arial, sans-serif;
         }
 
-        /* Background dengan efek blur */
         body {
             background: url('https://raw.githubusercontent.com/BOTCOIN-exe/logo-botcoin/refs/heads/main/Screenshot_2025-02-07-14-32-59-88_99c04817c0de5652397fc8b56c3b3817.jpg') no-repeat center center fixed;
             background-size: cover;
@@ -35,11 +33,10 @@
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(8px);
+            backdrop-filter: blur(0px);
             z-index: -1;
         }
 
-        /* Header */
         .header {
             position: fixed;
             top: 0;
@@ -86,7 +83,7 @@
             color: black;
         }
 
-        /* Modal */
+        /* Modal Style */
         .modal {
             display: none;
             position: fixed;
@@ -103,16 +100,17 @@
         .modal-content {
             background-color: white;
             padding: 20px;
-            width: 300px;
+            width: 350px;
             border-radius: 10px;
             text-align: center;
             color: black;
             position: relative;
+            box-shadow: 0px 0px 10px rgba(255, 215, 0, 0.8);
         }
 
         .modal input {
             width: 100%;
-            padding: 8px;
+            padding: 10px;
             margin: 10px 0;
             border: 1px solid #ccc;
             border-radius: 5px;
@@ -142,36 +140,16 @@
             cursor: pointer;
         }
 
-        /* Password Input dengan Ikon Mata */
-        .password-container {
-            position: relative;
-            width: 100%;
-        }
-
-        .password-container input {
-            width: 100%;
-            padding-right: 40px;
-        }
-
-        .password-container i {
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            cursor: pointer;
-        }
-
     </style>
 </head>
 <body>
 
-<!-- Header -->
 <div class="header">
     <img src="https://raw.githubusercontent.com/BOTCOIN-exe/logo-botcoin/refs/heads/main/Screenshot_2025-02-07-14-32-59-88_99c04817c0de5652397fc8b56c3b3817.jpg" alt="Botcoin Logo" class="logo">
     <div class="header-title">BOTCOIN</div>
     <div class="auth-buttons">
         <button onclick="openModal('loginModal')">Login</button>
-        <button onclick="openModal('registerModal')">Register</button> 
+        <button onclick="openModal('registerModal')">Register</button>
     </div>
 </div>
 
@@ -181,10 +159,7 @@
         <span class="close-btn" onclick="closeModal('loginModal')">&times;</span>
         <h3>Login</h3>
         <input type="email" placeholder="Email" id="loginEmail">
-        <div class="password-container">
-            <input type="password" id="loginPassword" placeholder="Password">
-            <i class="fa fa-eye" onclick="togglePassword('loginPassword', this)"></i>
-        </div>
+        <input type="password" placeholder="Password" id="loginPassword">
         <button onclick="login()">Login</button>
     </div>
 </div>
@@ -194,52 +169,90 @@
     <div class="modal-content">
         <span class="close-btn" onclick="closeModal('registerModal')">&times;</span>
         <h3>Register</h3>
-
         <input type="text" placeholder="Username" id="regUsername">
-
         <input type="email" placeholder="Email" id="regEmail">
-
-        <div class="password-container">
-            <input type="password" id="regPassword" placeholder="Password">
-            <i class="fa fa-eye" onclick="togglePassword('regPassword', this)"></i>
-        </div>
-
-        <div class="password-container">
-            <input type="password" id="confirmPassword" placeholder="Confirm Password">
-            <i class="fa fa-eye" onclick="togglePassword('confirmPassword', this)"></i>
-        </div>
-
+        <input type="password" placeholder="Password" id="regPassword">
+        <input type="password" placeholder="Confirm Password" id="regConfirmPassword">
         <button onclick="register()">Register</button>
     </div>
 </div>
-<div style="height: 80px;"></div>
-<section id="botcoin-info" style="padding: 20px; color: white; text-align: center;">
-    <h2 style="color: gold;">Botcoin Website</h2>
-    <p>The Botcoin website is a platform designed to provide information and services related to the Botcoin cryptocurrency project.</p>
 
-    <h3>Main Features</h3>
-    <ul style="list-style: none; padding: 0; text-align: left; max-width: 600px; margin: 0 auto;">
-        <li><strong>1. Login</strong><br>A page for registered users to access their accounts. Uses an authentication system based on email and password.</li><br>
-        <li><strong>2. Register</strong><br>A registration form for new users to create an account. User data will be securely stored in a database (planned to use Supabase).</li><br>
-        <li><strong>3. Whitepaper</strong><br>An official document that explains the vision, mission, and technology behind Botcoin. Contains technical information and project strategy.</li><br>
-        <li><strong>4. Log Out</strong><br>An option for users to securely log out of their accounts.</li><br>
-        <li><strong>5. Terms of Service</strong><br>The terms and conditions governing the use of the Botcoin platform. Users must agree to them before using the services.</li><br>
-        <li><strong>6. Privacy Policy</strong><br>A policy explaining how user data is collected, stored, and used.</li><br>
-        <li><strong>7. Airdrop</strong><br>A program that allows users to receive free Botcoin as part of promotion and early adoption. Usually requires participation, such as sharing information about Botcoin.</li><br>
-        <li><strong>8. Pre Sale</strong><br>The initial sale phase of Botcoin before its official launch. Users can purchase Botcoin at a lower price than the market price upon listing.</li><br>
-        <li><strong>9. Donation</strong><br>An option for users who want to support the project through donations. Can be in the form of cryptocurrency or other payment methods.</li><br>
-        <li><strong>10. Help Center</strong><br>A support center for users experiencing issues or having questions about Botcoin. Includes FAQs, guides, and support contact information.</li>
-    </ul>
+<section content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Botcoin</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #121212;
+            color: #ffffff;
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: rgba(30,30,30,0.6);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+        }
+        h1 {
+            color: #FFD700;
+            font-weight: bold;
+        }
+        .highlight {
+            color: #ffffff;
+            font-weight: bold;
+        }
+        .content {
+            text-align: left;
+            font-size: 18px;
+            font-weight: bold;
+            line-height: 1.8;
+        }
+        .blur-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            backdrop-filter: blur(8px); /* Tingkatkan nilai blur */
+            z-index: -1; /* Tetap di belakang teks */
+}
+    </style>
+    <style>
+    .container {
+        max-width: 800px;
+        margin: 100px auto 50px; /* Tambahkan margin atas agar ada jarak dari header */
+        padding: 20px;
+        background-color: rgba(30, 30, 30, 0.6);
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+    }
+</style>
+</head>
+<body>
+<script></script> <div class="container">
+    <div class="blur-layer"></div>
+        <h1>🚀 Welcome to Botcoin! 🚀</h1>
+        <p><span class="highlight">Hello, pioneers of the digital financial future! 🌟</span></p>
+        <p><span class="highlight">At Botcoin, we’re not just building a cryptocurrency—we’re building the future with you!</span></p>
 
-    <h3 style="margin-top: 20px;">Conclusion</h3>
-    <p> The Botcoin website is not just an information hub but also a place for the community to engage in its ecosystem. With features that support security and transparency, Botcoin aims to be a trustworthy project for users and investors.</p>
-</section>
+        <h2>💎 Why Join Botcoin?</h2>
+        <div class="content">
+            ✅ <span class="highlight">Exclusive Access</span> to a secure & innovative crypto ecosystem <br>
+            ✅ <span class="highlight">Earn Free Rewards</span> through the Botcoin Airdrop 🎁 <br>
+            ✅ <span class="highlight">Pre-Sale Opportunity</span> to get Botcoin at the best price before market listing 📈 <br>
+            ✅ <span class="highlight">Support the Future</span> by donating and becoming part of our journey 🙌 <br><br>
+        </div>
+
+        <p><span class="highlight">💡 Don’t miss this opportunity! Log in now and join our fast-growing crypto community.</span></p>
+        <p><span class="highlight">🔗 Join now and start your financial adventure with Botcoin!</span></p>
     </div>
-</div>
+    
+</section>
 
 <script>
-    const supabase = supabase.createClient("https://ceoprfmktepicydftxjd.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNlb3ByZm1rdGVwaWN5ZGZ0eGpkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzkwNzQzMzgsImV4cCI6MjA1NDY1MDMzOH0.g7g4R-UotgVwYo0h2sGPbaVBBd2Rn0fZPP52PpJEQu0");
-
     function openModal(id) {
         document.getElementById(id).style.display = 'flex';
     }
@@ -248,13 +261,12 @@
         document.getElementById(id).style.display = 'none';
     }
 
-    function togglePassword(inputId, icon) {
-        let input = document.getElementById(inputId);
-        input.type = input.type === "password" ? "text" : "password";
-        icon.classList.toggle("fa-eye-slash");
-    }
+    const supabaseUrl = https://ceoprfmktepicydftxjd.supabase.co"https://ceoprfmktepicydftxjd.supabase.co";
+    const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNlb3ByZm1rdGVwaWN5ZGZ0eGpkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzkwNzQzMzgsImV4cCI6MjA1NDY1MDMzOH0.g7g4R-UotgVwYo0h2sGPbaVBBd2Rn0fZPP52PpJEQu0";
+    const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
     async function register() {
+        const username = document.getElementById("regUsername").value;
         const email = document.getElementById("regEmail").value;
         const password = document.getElementById("regPassword").value;
 
@@ -263,7 +275,8 @@
         if (error) {
             alert("Register gagal: " + error.message);
         } else {
-            alert("Registrasi berhasil, cek email untuk verifikasi!");
+            localStorage.setItem("username", username);
+            window.location.href = "https://botcoin-exe.github.io/home-pages2/";
         }
     }
 
@@ -280,6 +293,18 @@
         }
     }
 </script>
+<script>
+    function openModal(id) {
+        document.getElementById(id).style.display = 'flex';
+    }
+
+    function closeModal(id) {
+        document.getElementById(id).style.display = 'none';
+    }
+</script>
 
 </body>
-                                                                                                                                                                                                  </html>
+</html>
+
+
+  © BOTCOIN 2025
