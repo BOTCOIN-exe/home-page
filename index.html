@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BOTCOIN - Homepage</title>
 
+    <!-- Muat Supabase lebih dulu -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
-    <style>
-        * {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>* {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -33,7 +33,7 @@
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(0px);
+            backdrop-filter: blur(3px);
             z-index: -1;
         }
 
@@ -63,11 +63,6 @@
             color: gold;
         }
 
-        .auth-buttons {
-            display: flex;
-            gap: 10px;
-        }
-
         .auth-buttons button {
             background: none;
             border: 2px solid gold;
@@ -83,7 +78,7 @@
             color: black;
         }
 
-        /* Modal Style */
+        /* Modal */
         .modal {
             display: none;
             position: fixed;
@@ -103,8 +98,6 @@
             width: 350px;
             border-radius: 10px;
             text-align: center;
-            color: black;
-            position: relative;
             box-shadow: 0px 0px 10px rgba(255, 215, 0, 0.8);
         }
 
@@ -118,10 +111,9 @@
 
         .modal button {
             background-color: gold;
-            color: black;
             padding: 10px;
-            border: none;
             width: 100%;
+            border: none;
             border-radius: 5px;
             cursor: pointer;
         }
@@ -131,15 +123,108 @@
         }
 
         .close-btn {
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            font-size: 20px;
-            font-weight: bold;
-            color: red;
-            cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 20px;
+    font-weight: bold;
+    color: red;
+    cursor: pointer;
+    background: none;
+    border: none;
+    outline: none;
+}
+.modal-content {
+    position: relative; /* Pastikan modal-content bisa menjadi referensi untuk close-btn */
+    background-color: white;
+    padding: 20px;
+    width: 350px;
+    border-radius: 10px;
+    text-align: center;
+    color: black;
+    box-shadow: 0px 0px 10px rgba(255, 215, 0, 0.8);
         }
 
+        .password-container {
+            position: relative;
+            width: 100%;
+        }
+
+        .password-container input {
+            width: 100%;
+            padding: 10px;
+            padding-right: 35px;
+            border-radius: 5px;
+        }
+
+        .toggle-icon {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            cursor: pointer;
+            font-size: 16px;
+            color: #555;
+        }
+       #welcome-section {
+    margin-top: 100px; /* Tambahkan jarak dari header */
+    text-align: center;
+    color: gold;
+    padding: 40px 20px;
+}
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(255, 215, 0, 0.8); /* Efek cahaya emas */
+    .container {
+    max-width: 800px;
+    margin: 120px auto 50px; /* Tambahkan margin-top agar tidak tertimpa header */
+    padding: 120px;
+    background-color: none;
+    border-radius: 10px;
+    color: white;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+    .content {
+    margin-top: 20px; /* Sesuaikan agar tidak tertimpa header */
+    text-align: center;
+    padding: 120px;
+    color: white; /* Atur warna teks jika perlu */
+}
+
+.welcome-content h1 {
+    font-size: 28px;
+    margin-bottom: 10px;
+    color: #FFD700; /* Warna emas */
+}
+
+.welcome-content h3 {
+    margin-top: 20px;
+    font-size: 22px;
+    color: #FFD700;
+}
+
+.welcome-content ul {
+    list-style: none;
+    padding: 0;
+}
+
+.welcome-content ul li {
+    font-size: 18px;
+    margin: 5px 0;
+}
+
+.welcome-content p {
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.copyright {
+    padding-top: 50px;
+    display: block;
+    text-align: center;
+    font-size: 14px;
+    color: white;
+}
+    
     </style>
 </head>
 <body>
@@ -159,7 +244,12 @@
         <span class="close-btn" onclick="closeModal('loginModal')">&times;</span>
         <h3>Login</h3>
         <input type="email" placeholder="Email" id="loginEmail">
-        <input type="password" placeholder="Password" id="loginPassword">
+        
+        <div class="password-container">
+            <input type="password" placeholder="Password" id="loginPassword">
+            <i class="fa fa-eye toggle-icon" id="toggleIconLogin" onclick="togglePassword('loginPassword', 'toggleIconLogin')"></i>
+        </div>
+        
         <button onclick="login()">Login</button>
     </div>
 </div>
@@ -169,142 +259,105 @@
     <div class="modal-content">
         <span class="close-btn" onclick="closeModal('registerModal')">&times;</span>
         <h3>Register</h3>
-        <input type="text" placeholder="Username" id="regUsername">
         <input type="email" placeholder="Email" id="regEmail">
-        <input type="password" placeholder="Password" id="regPassword">
-        <input type="password" placeholder="Confirm Password" id="regConfirmPassword">
+        
+        <div class="password-container">
+            <input type="password" placeholder="Password" id="regPassword">
+            <i class="fa fa-eye toggle-icon" id="toggleIconReg" onclick="togglePassword('regPassword', 'toggleIconReg')"></i>
+        </div>
+<div class="password-container">
+            <input type="password" placeholder="Confirm Password" id="regConfirmPassword">
+            <i class="fa fa-eye toggle-icon" id="toggleIconConfirm" onclick="togglePassword('regConfirmPassword', 'toggleIconConfirm')"></i>
+        </div>
         <button onclick="register()">Register</button>
     </div>
 </div>
 
-<section content="width=device-width, initial-scale=1.0">
-    <title>Welcome to Botcoin</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #121212;
-            color: #ffffff;
-            text-align: center;
-        }
-        .container {
-            max-width: 800px;
-            margin: 50px auto;
-            padding: 20px;
-            background-color: rgba(30,30,30,0.6);
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
-        }
-        h1 {
-            color: #FFD700;
-            font-weight: bold;
-        }
-        .highlight {
-            color: #ffffff;
-            font-weight: bold;
-        }
-        .content {
-            text-align: left;
-            font-size: 18px;
-            font-weight: bold;
-            line-height: 1.8;
-        }
-        .blur-layer {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            backdrop-filter: blur(8px); /* Tingkatkan nilai blur */
-            z-index: -1; /* Tetap di belakang teks */
-}
-    </style>
-    <style>
-    .container {
-        max-width: 800px;
-        margin: 100px auto 50px; /* Tambahkan margin atas agar ada jarak dari header */
-        padding: 20px;
-        background-color: rgba(30, 30, 30, 0.6);
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
-    }
-</style>
-</head>
-<body>
-<script></script> <div class="container">
-    <div class="blur-layer"></div>
+<section id="welcome-section">
+    <div class="content">
         <h1>🚀 Welcome to Botcoin! 🚀</h1>
-        <p><span class="highlight">Hello, pioneers of the digital financial future! 🌟</span></p>
-        <p><span class="highlight">At Botcoin, we’re not just building a cryptocurrency—we’re building the future with you!</span></p>
+        <p>Hello, pioneers of the digital financial future! 🌟</p>
+    <p>At Botcoin, we’re not just building a cryptocurrency—we’re building the future with you!</p>
 
-        <h2>💎 Why Join Botcoin?</h2>
-        <div class="content">
-            ✅ <span class="highlight">Exclusive Access</span> to a secure & innovative crypto ecosystem <br>
-            ✅ <span class="highlight">Earn Free Rewards</span> through the Botcoin Airdrop 🎁 <br>
-            ✅ <span class="highlight">Pre-Sale Opportunity</span> to get Botcoin at the best price before market listing 📈 <br>
-            ✅ <span class="highlight">Support the Future</span> by donating and becoming part of our journey 🙌 <br><br>
-        </div>
+    <h2>💎 Why Join Botcoin?</h2>
+    <p>✅ <strong>Exclusive Access</strong> to a secure & innovative crypto ecosystem <br>
+       ✅ <strong>Earn Free Rewards</strong> through the Botcoin Airdrop 🎁 <br>
+       ✅ <strong>Pre-Sale Opportunity</strong> to get Botcoin at the best price before market listing 📈 <br>
+       ✅ <strong>Support the Future</strong> by donating and becoming part of our journey 🙌</p>
 
-        <p><span class="highlight">💡 Don’t miss this opportunity! Log in now and join our fast-growing crypto community.</span></p>
-        <p><span class="highlight">🔗 Join now and start your financial adventure with Botcoin!</span></p>
-    </div>
-    
+    <p>💡 Don’t miss this opportunity! Log in now and join our fast-growing crypto community.</p>
+    <p>🔗 Join now and start your financial adventure with Botcoin!</p>
+  <p>___________________________________________</p>  <div>@BOTCOIN2025</div>
 </section>
 
+<!-- Script JavaScript -->
 <script>
+    // Inisialisasi Supabase
+    const supabaseUrl = "https://ceoprfmktepicydftxjd.supabase.co";
+    const supabaseKey = "ISI_DENGAN_ANON_KEY_SUPABASE"; 
+    const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+    console.log("Supabase initialized:", supabase);
+
+    // Fungsi untuk membuka modal
     function openModal(id) {
         document.getElementById(id).style.display = 'flex';
     }
 
+    // Fungsi untuk menutup modal
     function closeModal(id) {
         document.getElementById(id).style.display = 'none';
     }
 
-    const supabaseUrl = https://ceoprfmktepicydftxjd.supabase.co"https://ceoprfmktepicydftxjd.supabase.co";
-    const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNlb3ByZm1rdGVwaWN5ZGZ0eGpkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzkwNzQzMzgsImV4cCI6MjA1NDY1MDMzOH0.g7g4R-UotgVwYo0h2sGPbaVBBd2Rn0fZPP52PpJEQu0";
-    const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+    // Fungsi untuk toggle password
+    function togglePassword(inputId, iconId) {
+        var input = document.getElementById(inputId);
+        var icon = document.getElementById(iconId);
+        if (input.type === "password") {
+            input.type = "text";
+            icon.classList.replace("fa-eye", "fa-eye-slash");
+        } else {
+            input.type = "password";
+            icon.classList.replace("fa-eye-slash", "fa-eye");
+        }
+    }
 
+    // Fungsi Register
     async function register() {
-        const username = document.getElementById("regUsername").value;
         const email = document.getElementById("regEmail").value;
         const password = document.getElementById("regPassword").value;
+
+        console.log("Register function triggered"); // Debug log
 
         let { error } = await supabase.auth.signUp({ email, password });
 
         if (error) {
+            console.error("Register gagal:", error.message);
             alert("Register gagal: " + error.message);
         } else {
-            localStorage.setItem("username", username);
+            console.log("Register sukses, mengarahkan ke halaman home.");
             window.location.href = "https://botcoin-exe.github.io/home-pages2/";
         }
     }
 
+    // Fungsi Login
     async function login() {
         const email = document.getElementById("loginEmail").value;
         const password = document.getElementById("loginPassword").value;
 
+        console.log("Login function triggered"); // Debug log
+
         let { error } = await supabase.auth.signInWithPassword({ email, password });
 
         if (error) {
+            console.error("Login gagal:", error.message);
             alert("Login gagal: " + error.message);
         } else {
+            console.log("Login sukses.");
             alert("Login berhasil!");
         }
     }
 </script>
-<script>
-    function openModal(id) {
-        document.getElementById(id).style.display = 'flex';
-    }
-
-    function closeModal(id) {
-        document.getElementById(id).style.display = 'none';
-    }
-</script>
 
 </body>
-</html>
-
-
-  © BOTCOIN 2025
+        </html>
