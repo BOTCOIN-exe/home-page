@@ -259,16 +259,21 @@
     <div class="modal-content">
         <span class="close-btn" onclick="closeModal('registerModal')">&times;</span>
         <h3>Register</h3>
+
+        <input type="text" placeholder="Username" id="regUsername">
+
         <input type="email" placeholder="Email" id="regEmail">
         
         <div class="password-container">
             <input type="password" placeholder="Password" id="regPassword">
             <i class="fa fa-eye toggle-icon" id="toggleIconReg" onclick="togglePassword('regPassword', 'toggleIconReg')"></i>
         </div>
-<div class="password-container">
+
+        <div class="password-container">
             <input type="password" placeholder="Confirm Password" id="regConfirmPassword">
             <i class="fa fa-eye toggle-icon" id="toggleIconConfirm" onclick="togglePassword('regConfirmPassword', 'toggleIconConfirm')"></i>
         </div>
+
         <button onclick="register()">Register</button>
     </div>
 </div>
@@ -287,7 +292,7 @@
 
     <p>💡 Don’t miss this opportunity! Log in now and join our fast-growing crypto community.</p>
     <p>🔗 Join now and start your financial adventure with Botcoin!</p>
-  <p>___________________________________________</p>  <div>@BOTCOIN2025</div>
+  <p>___________________________________________</p>
 </section>
 
 <!-- Script JavaScript -->
@@ -358,6 +363,30 @@
         }
     }
 </script>
+<footer>
+    <div class="contact">
+        <p>📩 Contact us: <a href="mailto:botcoin1987@gmail.com">botcoin1987@gmail.com</a></p>
+    </div>
+</footer>
 
+<style>
+    footer {
+        margin-top: 50px;
+        text-align: center;
+        padding: 10px;
+        color: white;
+        font-size: 14px;
+    }
+
+    .contact a {
+        color: gold;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .contact a:hover {
+        text-decoration: underline;
+    }
+</style>
 </body>
-        </html>
+    </html>
