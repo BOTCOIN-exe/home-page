@@ -5,15 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BOTCOIN - Homepage</title>
 
-    <!-- Muat Supabase lebih dulu -->
+    <!-- Supabase -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 
+    <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <style>* {
+
+    <style>
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: Arial, sans-serif;
+            font-family: Georgia, sans-serif;
         }
 
         body {
@@ -23,6 +26,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            position: relative;
         }
 
         body::before {
@@ -37,6 +41,7 @@
             z-index: -1;
         }
 
+        /* Header */
         .header {
             position: fixed;
             top: 0;
@@ -50,8 +55,43 @@
             padding: 0 20px;
             border-bottom: 2px solid gold;
             z-index: 1000;
-        }
+        }/* Welcome Section */
+/* Welcome Section */
+#welcome-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    color: gold;
+    padding: 50px 20px;
+    width: 100%;
+    margin-top: 120px; /* Tambahkan jarak agar tidak tertimpa header */
+}
 
+.container {
+    max-width: 800px;
+    background: rgba(0, 0, 0, 0.7); /* Background semi transparan */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+/* Whitepaper Position */
+.whitepaper {
+    position: absolute;
+    top: 90px; /* Naikkan sedikit agar tidak bertabrakan */
+    left: 20px;
+    font-size: 18px; /* Ukuran teks sedikit lebih kecil */
+    font-weight: bold;
+    color: gold;
+    text-shadow: 2px 2px 5px rgba(255, 215, 0, 0.8);
+    cursor: pointer;
+}
+
+.whitepaper:hover {
+    text-decoration: underline;
+}
         .logo {
             width: 50px;
             height: 50px;
@@ -73,162 +113,149 @@
             transition: 0.3s;
         }
 
-        .auth-buttons button:hover {
-            background: gold;
-            color: black;
+        /* Tombol Login & Register */
+.auth-buttons button {
+    background: gold; /* Warna emas solid */
+    border: none;
+    color: black;
+    font-size: 14px;
+    padding: 10px 16px;
+    cursor: pointer;
+    border-radius: 8px; /* Membulat sedikit */
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 3px 5px rgba(255, 215, 0, 0.4);
+}
+
+/* Efek Hover */
+.auth-buttons button:hover {
+    background: rgb(218, 165, 32); /* Warna emas lebih gelap saat hover */
+    box-shadow: 0 4px 10px rgba(218, 165, 32, 0.7);
+}
+
+/* Efek Klik */
+.auth-buttons button:active {
+    transform: scale(0.95);
+}
+
+/* Tombol di Modal */
+.modal button {
+    background: gold;
+    color: black;
+    font-size: 16px;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 3px 5px rgba(255, 215, 0, 0.4);
+}
+
+/* Hover dan Efek di Modal */
+.modal button:hover {
+    background: rgb(218, 165, 32);
+    box-shadow: 0 4px 10px rgba(218, 165, 32, 0.7);
+}
+
+.modal button:active {
+    transform: scale(0.95);
+}
+        /* Whitepaper */
+        .whitepaper {
+            position: absolute;
+            top: 80px;
+            left: 20px;
+            font-size: 20px;
+            font-weight: bold;
+            color: gold;
+            cursor: pointer;
+        }
+
+        .whitepaper:hover {
+            text-decoration: underline;
         }
 
         /* Modal */
         .modal {
             display: none;
             position: fixed;
-            z-index: 1000;
-            left: 0;
             top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.7);
             justify-content: center;
             align-items: center;
         }
 
         .modal-content {
-            background-color: white;
+            background: black;
             padding: 20px;
-            width: 350px;
-            border-radius: 10px;
+            border: 2px solid gold;
+            border-radius: 8px;
+            width: 300px;
             text-align: center;
-            box-shadow: 0px 0px 10px rgba(255, 215, 0, 0.8);
-        }
-
-        .modal input {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        .modal button {
-            background-color: gold;
-            padding: 10px;
-            width: 100%;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .modal button:hover {
-            background-color: #c2a100;
+            color: white;
+            position: relative;
         }
 
         .close-btn {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    font-size: 20px;
-    font-weight: bold;
-    color: red;
-    cursor: pointer;
-    background: none;
-    border: none;
-    outline: none;
-}
-.modal-content {
-    position: relative; /* Pastikan modal-content bisa menjadi referensi untuk close-btn */
-    background-color: white;
-    padding: 20px;
-    width: 350px;
-    border-radius: 10px;
-    text-align: center;
-    color: black;
-    box-shadow: 0px 0px 10px rgba(255, 215, 0, 0.8);
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 18px;
+            cursor: pointer;
+            color: gold;
         }
 
-        .password-container {
+        .input-group {
+            margin-bottom: 10px;
             position: relative;
-            width: 100%;
         }
 
-        .password-container input {
+        .input-group input {
             width: 100%;
             padding: 10px;
-            padding-right: 35px;
-            border-radius: 5px;
+            border: 1px solid gold;
+            background: black;
+            color: white;
         }
 
-        .toggle-icon {
+        .toggle-password {
             position: absolute;
-            top: 50%;
             right: 10px;
+            top: 50%;
             transform: translateY(-50%);
             cursor: pointer;
-            font-size: 16px;
-            color: #555;
+            color: gold;
         }
-       #welcome-section {
-    margin-top: 100px; /* Tambahkan jarak dari header */
-    text-align: center;
-    color: gold;
-    padding: 40px 20px;
-}
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(255, 215, 0, 0.8); /* Efek cahaya emas */
-    .container {
-    max-width: 800px;
-    margin: 120px auto 50px; /* Tambahkan margin-top agar tidak tertimpa header */
-    padding: 120px;
-    background-color: none;
-    border-radius: 10px;
-    color: white;
-    text-align: center;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
-    .content {
-    margin-top: 20px; /* Sesuaikan agar tidak tertimpa header */
-    text-align: center;
-    padding: 120px;
-    color: white; /* Atur warna teks jika perlu */
-}
 
-.welcome-content h1 {
-    font-size: 28px;
-    margin-bottom: 10px;
-    color: #FFD700; /* Warna emas */
-}
-
-.welcome-content h3 {
-    margin-top: 20px;
-    font-size: 22px;
-    color: #FFD700;
-}
-
-.welcome-content ul {
-    list-style: none;
-    padding: 0;
-}
-
-.welcome-content ul li {
-    font-size: 18px;
-    margin: 5px 0;
-}
-
-.welcome-content p {
-    font-size: 16px;
-    line-height: 1.6;
-}
-
-.copyright {
-    padding-top: 50px;
-    display: block;
-    text-align: center;
-    font-size: 14px;
-    color: white;
-}
-    
+        .modal button {
+            background: gold;
+            color: black;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            width: 100%;
+        }
     </style>
 </head>
-<body>
 
+<body>
+<section id="welcome-section">
+    <div class="container">
+        <h1>🚀 Welcome to Botcoin! 🚀</h1>
+        <p>Hello, pioneers of the digital financial future! 🌟</p>
+        <h2>💎 Why Join Botcoin?</h2>
+        <p>✅ <strong>Exclusive Access</strong> to a secure & innovative crypto ecosystem</p>
+        <p>✅ <strong>Earn Free Rewards</strong> through the Botcoin Airdrop 🎁</p>
+        <p>✅ <strong>Pre-Sale Opportunity</strong> to get Botcoin at the best price before market listing 📈</p>
+        <p>✅ <strong>Support the Future</strong> by donating and becoming part of our journey 🙌</p>
+        <p>🔗 Join now and start your financial adventure with Botcoin!</p>
+    </div>
+</section>
+<!-- HEADER -->
 <div class="header">
     <img src="https://raw.githubusercontent.com/BOTCOIN-exe/logo-botcoin/refs/heads/main/Screenshot_2025-02-07-14-32-59-88_99c04817c0de5652397fc8b56c3b3817.jpg" alt="Botcoin Logo" class="logo">
     <div class="header-title">BOTCOIN</div>
@@ -237,160 +264,75 @@
         <button onclick="openModal('registerModal')">Register</button>
     </div>
 </div>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=NamaFont:wght@400;700&display=swap" rel="stylesheet">
+<!-- WHITEPAPER -->
+<a href="https://botcoin-exe.github.io/whitepaper/" class="whitepaper">WHITEPAPER</a>
 
-<!-- Modal Login -->
-<div class="modal" id="loginModal">
+<!-- LOGIN MODAL -->
+<div id="loginModal" class="modal">
     <div class="modal-content">
         <span class="close-btn" onclick="closeModal('loginModal')">&times;</span>
-        <h3>Login</h3>
-        <input type="email" placeholder="Email" id="loginEmail">
-        
-        <div class="password-container">
-            <input type="password" placeholder="Password" id="loginPassword">
-            <i class="fa fa-eye toggle-icon" id="toggleIconLogin" onclick="togglePassword('loginPassword', 'toggleIconLogin')"></i>
+        <h2>Login</h2>
+        <div class="input-group">
+            <input type="text" id="loginUsername" placeholder="Username">
         </div>
-        
+        <div class="input-group">
+            <input type="password" id="loginPassword" placeholder="Password">
+            <i class="fa fa-eye toggle-password" onclick="togglePassword('loginPassword')"></i>
+        </div>
         <button onclick="login()">Login</button>
     </div>
 </div>
 
-<!-- Modal Register -->
-<div class="modal" id="registerModal">
+<!-- REGISTER MODAL -->
+<div id="registerModal" class="modal">
     <div class="modal-content">
         <span class="close-btn" onclick="closeModal('registerModal')">&times;</span>
-        <h3>Register</h3>
-
-        <input type="text" placeholder="Username" id="regUsername">
-
-        <input type="email" placeholder="Email" id="regEmail">
-        
-        <div class="password-container">
-            <input type="password" placeholder="Password" id="regPassword">
-            <i class="fa fa-eye toggle-icon" id="toggleIconReg" onclick="togglePassword('regPassword', 'toggleIconReg')"></i>
+        <h2>Register</h2>
+        <div class="input-group">
+            <input type="text" id="regUsername" placeholder="Username">
         </div>
-
-        <div class="password-container">
-            <input type="password" placeholder="Confirm Password" id="regConfirmPassword">
-            <i class="fa fa-eye toggle-icon" id="toggleIconConfirm" onclick="togglePassword('regConfirmPassword', 'toggleIconConfirm')"></i>
+        <div class="input-group">
+            <input type="email" id="regEmail" placeholder="Email">
         </div>
-
+        <div class="input-group">
+            <input type="password" id="regPassword" placeholder="Password">
+            <i class="fa fa-eye toggle-password" onclick="togglePassword('regPassword')"></i>
+        </div>
+        <div class="input-group">
+            <input type="password" id="regConfirmPassword" placeholder="Confirm Password">
+            <i class="fa fa-eye toggle-password" onclick="togglePassword('regConfirmPassword')"></i>
+        </div>
         <button onclick="register()">Register</button>
     </div>
 </div>
 
-<section id="welcome-section">
-    <div class="content">
-        <h1>🚀 Welcome to Botcoin! 🚀</h1>
-        <p>Hello, pioneers of the digital financial future! 🌟</p>
-    <p>At Botcoin, we’re not just building a cryptocurrency—we’re building the future with you!</p>
-
-    <h2>💎 Why Join Botcoin?</h2>
-    <p>✅ <strong>Exclusive Access</strong> to a secure & innovative crypto ecosystem <br>
-       ✅ <strong>Earn Free Rewards</strong> through the Botcoin Airdrop 🎁 <br>
-       ✅ <strong>Pre-Sale Opportunity</strong> to get Botcoin at the best price before market listing 📈 <br>
-       ✅ <strong>Support the Future</strong> by donating and becoming part of our journey 🙌</p>
-
-    <p>💡 Don’t miss this opportunity! Log in now and join our fast-growing crypto community.</p>
-    <p>🔗 Join now and start your financial adventure with Botcoin!</p>
-  <p>___________________________________________</p>
-</section>
-
-<!-- Script JavaScript -->
+<!-- SCRIPT -->
 <script>
-    // Inisialisasi Supabase
     const supabaseUrl = "https://ceoprfmktepicydftxjd.supabase.co";
-    const supabaseKey = "ISI_DENGAN_ANON_KEY_SUPABASE"; 
+    const supabaseKey = "ISI_DENGAN_ANON_KEY_SUPABASE";
     const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
-    console.log("Supabase initialized:", supabase);
-
-    // Fungsi untuk membuka modal
     function openModal(id) {
         document.getElementById(id).style.display = 'flex';
     }
 
-    // Fungsi untuk menutup modal
     function closeModal(id) {
         document.getElementById(id).style.display = 'none';
     }
 
-    // Fungsi untuk toggle password
-    function togglePassword(inputId, iconId) {
-        var input = document.getElementById(inputId);
-        var icon = document.getElementById(iconId);
-        if (input.type === "password") {
-            input.type = "text";
-            icon.classList.replace("fa-eye", "fa-eye-slash");
-        } else {
-            input.type = "password";
-            icon.classList.replace("fa-eye-slash", "fa-eye");
-        }
-    }
-
-    // Fungsi Register
-    async function register() {
-        const email = document.getElementById("regEmail").value;
-        const password = document.getElementById("regPassword").value;
-
-        console.log("Register function triggered"); // Debug log
-
-        let { error } = await supabase.auth.signUp({ email, password });
-
-        if (error) {
-            console.error("Register gagal:", error.message);
-            alert("Register gagal: " + error.message);
-        } else {
-            console.log("Register sukses, mengarahkan ke halaman home.");
-            window.location.href = "https://botcoin-exe.github.io/home-pages2/";
-        }
-    }
-
-    // Fungsi Login
-    async function login() {
-        const email = document.getElementById("loginEmail").value;
-        const password = document.getElementById("loginPassword").value;
-
-        console.log("Login function triggered"); // Debug log
-
-        let { error } = await supabase.auth.signInWithPassword({ email, password });
-
-        if (error) {
-            console.error("Login gagal:", error.message);
-            alert("Login gagal: " + error.message);
-        } else {
-            console.log("Login sukses.");
-            alert("Login berhasil!");
-        }
+    function togglePassword(id) {
+        let input = document.getElementById(id);
+        input.type = input.type === "password" ? "text" : "password";
     }
 </script>
-<footer>
-    <div class="contact">
-        <p>📩 Contact us: 
-            <a href="mailto:botcoin1987@gmail.com?subject=Inquiry%20about%20Botcoin&body=Hello%20Botcoin%20Team,%0D%0A%0D%0A I%20would%20like%20to%20ask%20about..." target="_blank">
-                botcoin1987@gmail.com
-            </a>
-        </p>
-    </div>
+<!-- FOOTER -->
+<footer style="width: 100%; text-align: center; padding: 20px 0; background: rgba(0, 0, 0, 0.8); position: fixed; bottom: 0;">
+    <p style="color: white; font-size: 14px;">
+        📩 <strong>Contact us:</strong> 
+        <a href="mailto:botcoin1987@gmail.com" style="color: gold; text-decoration: none;">botcoin1987@gmail.com</a>
+    </p>
 </footer>
-
-<style>
-    footer {
-        margin-top: 50px;
-        text-align: center;
-        padding: 10px;
-        color: white;
-        font-size: 14px;
-    }
-
-    .contact a {
-        color: gold;
-        text-decoration: none;
-        font-weight: bold;
-    }
-
-    .contact a:hover {
-        text-decoration: underline;
-    }
-</style>
 </body>
-</html>
+    </html>
