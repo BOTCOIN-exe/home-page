@@ -3,411 +3,331 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BOTCOIN - Homepage</title>
-
+    <title>BOTCOIN</title>
+    <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-
     <style>
+        /* Reset Default */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: Arial, sans-serif;
         }
 
         body {
-    background: url('https://raw.githubusercontent.com/BOTCOIN-exe/logo-botcoin/refs/heads/main/Screenshot_2025-02-07-14-32-59-88_99c04817c0de5652397fc8b56c3b3817.jpg') no-repeat center center fixed;
-    background-size: cover;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-}
-body::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: inherit;
-    filter: blur(2px);
-    z-index: -1;
-}
+            font-family: Arial, sans-serif;
+            color: white;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            height: 100vh;
+        }
 
-/* Pastikan gambar tetap responsif */
-@media (max-width: 768px) { /* Untuk tampilan HP */
-    body {
-        background-size: contain; /* Gambar tidak terpotong */
-        background-attachment: scroll; /* Supaya tidak fixed di HP */
-    }
-}
+        /* Background blur */
+        .background-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://raw.githubusercontent.com/BOTCOIN-exe/logo-botcoin/refs/heads/main/Screenshot_2025-02-07-14-32-59-88_99c04817c0de5652397fc8b56c3b3817.jpg') no-repeat center center;
+            background-size: cover;
+            filter: blur(5px);
+            z-index: -1;
+        }
 
-        /* HEADER */
+        /* Header */
         .header {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            height: 70px;
+            height: 60px;
             background: rgba(0, 0, 0, 0.8);
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 20px;
+            padding: 10px 20px;
             border-bottom: 2px solid gold;
             z-index: 1000;
         }
 
-        .logo {
-            width: 50px;
-            height: 50px;
-        }
-
         .header-title {
-            font-size: 20px;
+            font-size: 24px;
             font-weight: bold;
             color: gold;
+        }
+
+        .logo {
+            width: 40px;
+            height: 40px;
         }
 
         .auth-buttons {
             display: flex;
             gap: 10px;
-            margin-left: auto;
         }
 
-        .auth-buttons button {
-            background: gold;
-            border: none;
-            color: black;
+        button {
+            padding: 8px 16px;
             font-size: 14px;
-            font-weight: bold;
-            padding: 8px 15px;
+            background-color: #ffd700;
+            color: #000;
+            border: none;
             border-radius: 5px;
             cursor: pointer;
-            transition: 0.3s;
-            box-shadow: 0 4px 6px rgba(255, 215, 0, 0.5);
+            transition: background-color 0.3s ease;
         }
 
-        .auth-buttons button:hover {
-            background: white;
-            color: gold;
-            box-shadow: 0 4px 8px rgba(255, 215, 0, 0.8);
+        button:hover {
+            background-color: #ffa500;
         }
 
-        /* MODAL */
-.modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
-}
+        /* Iklan berjalan */
+        .marquee {
+            width: 100%;
+            background: rgba(255, 215, 0, 0.8);
+            color: black;
+            padding: 5px 0;
+            position: fixed;
+            top: 60px;
+            font-weight: bold;
+            font-size: 14px;
+            white-space: nowrap;
+            overflow: hidden;
+            z-index: 999;
+        }
 
-.modal.show {
-    display: flex;
-    opacity: 1;
-}
+        .marquee span {
+            display: inline-block;
+            padding-left: 100%;
+            animation: marquee 15s linear infinite;
+        }
 
-.modal-content {
-    position: relative; /* Pastikan modal sebagai parent dari close-btn */
-    background-color: white;
-    padding: 25px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 15px rgba(255, 215, 0, 0.9);
-    width: 360px;
-    text-align: center;
-    animation: fadeIn 0.3s ease-in-out;
-}
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
 
-/* Animasi masuk pop-up */
-@keyframes fadeIn {
-    from { transform: scale(0.9); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
-}
+        /* Konten utama */
+        .content {
+            position: relative;
+            z-index: 1;
+            padding: 50px;
+            text-align: center;
+            margin-top: 100px;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 10px;
+            padding: 20px;
+        }
+        
+        /* CSS untuk modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 900;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.3s ease-in-out;
+        }
+        
+        
+        
+        .modal-content {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            width: 85%;
+            max-width: 300px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 20px;
+            cursor: pointer;
+            color: #888;
+        }
 
-.close-btn {
-    position: absolute;
-    top: 10px;  /* Posisikan ke atas */
-    right: 10px; /* Posisikan ke kanan */
-    font-size: 22px;
-    color: #666;
-    cursor: pointer;
-    background: none;
-    border: none;
-    padding: 5px;
-    transition: 0.3s ease;
-}
+        
 
-             .close-btn {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    font-size: 24px;
-    color: #666;
-    cursor: pointer;
-    background: none;
-    border: none;
-    transition: color 0.3s ease-in-out;
-}
-.close-icon {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 24px;
-    font-weight: bold;
-    color: #666;
-    cursor: pointer;
-    transition: color 0.3s ease-in-out;
-}
-
-.close-icon:hover {
-    color: gold;
-}
+        .close-modal:hover {
+            color: #000;
+        }
+        
         input {
             width: 100%;
-            padding: 10px;
+            padding: 8px;
             margin: 10px 0;
-            border: 2px solid gold;
+            border: 2px solid #ffd700;
             border-radius: 5px;
             outline: none;
+            font-size: 14px;
         }
 
         .password-container {
             position: relative;
         }
-
-        .toggle-icon {
+        
+        
+        .toggle-password {
             position: absolute;
-            top: 50%;
             right: 10px;
+            top: 50%;
             transform: translateY(-50%);
             cursor: pointer;
-            color: gold;
-        }
-
-        .photo-label {
-            display: block;
-            margin-top: 10px;
             font-size: 14px;
-            color: #333;
         }
 
-        #photoPreview {
-            display: none;
-            width: 100px;
-            height: 100px;
-            object-fit: cover;
-            border-radius: 50%;
-            border: 2px solid gold;
-        }
+        
 
-        .modal button {
-            width: 100%;
-            background: gold;
-            color: black;
-            padding: 10px;
-            font-size: 16px;
-            font-weight: bold;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 10px;
-            transition: 0.3s;
-        }
+        @media screen and (max-width: 768px) {
+            .header-title {
+                font-size: 20px;
+            }
 
-        .modal button:hover {
-            background: white;
-            color: gold;
-            box-shadow: 0 4px 8px rgba(255, 215, 0, 0.8);
+            .content {
+                padding: 15px;
+            }
         }
     </style>
-    
 </head>
-<div style="
-    text-align: center; 
-    color: red; 
-    padding: 30px; 
-    max-width: 600px; 
-    margin: 100px auto 0; 
-    line-height: 1.8;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
-">
-    <h2 style="color: gold; margin-bottom: 15px; text-shadow: 2px 2px 8px rgba(255, 215, 0, 0.8);">
-        🟡 Welcome to BOTCOIN!
-    </h2>
-    <p style="font-size: 20px; margin-bottom: 20px; font-weight: bold;">
-        <em>"The Most Trusted Airdrop Platform – Fast, Secure, and Profitable!"</em>
-    </p>
-
-    <p style="font-size: 20px; margin-bottom: 10px;">✅ <strong>Earn Free BOTCOIN</strong> just by completing simple tasks!</p>
-    <p style="font-size: 20px; margin-bottom: 10px;">✅ <strong>Join now</strong> and start earning in the digital world!</p>
-    <p style="font-size: 20px; margin-bottom: 20px;">✅ <strong>The future of crypto is here</strong> – Don't miss out!</p>
-
-    <h3 style="color: blue; margin-bottom: 15px; text-shadow: 4px 4px 16px rgba(255, 215, 0, 0.8);">
-        💰 Want to Advertise?
-    </h3>
-    <p style="font-size: 20px; margin-bottom: 10px;">On this platform, you can easily place ads.</p>
-    <p style="font-size: 20px; font-weight: bold; margin-bottom: 10px;">Payment is made using BOTCOIN!</p>
-    <p style="font-size: 20px; margin-bottom: 20px;">Promote your business or project to the right crypto community!</p>
-
-    <h3 style="color: gold; margin-bottom: 15px; text-shadow: 2px 2px 8px rgba(255, 215, 0, 0.8);">
-        📩 Contact Us:
-    </h3>
-    <p style="font-size: 20px; margin-bottom: 20px;">
-        📧 <a href="mailto:botcoin1987@gmail.com" 
-        style="color: gold; text-decoration: none; font-weight: bold; 
-        text-shadow: 2px 2px 8px rgba(255, 215, 0, 0.8);">
-        botcoin1987@gmail.com</a>
-    </p>
-
-    <h3 style="color: gold; margin-bottom: 15px; text-shadow: 2px 2px 8px rgba(255, 215, 0, 0.8);">
-        🎯 Start now and be part of the BOTCOIN revolution!
-    </h3>
-    </p>
-</div>
 <body>
-<!-- HEADER -->
-<div class="header">
-    <img src="https://raw.githubusercontent.com/BOTCOIN-exe/logo-botcoin/refs/heads/main/Screenshot_2025-02-07-14-32-59-88_99c04817c0de5652397fc8b56c3b3817.jpg" 
-         alt="Botcoin Logo" class="logo">
-    <div class="header-title">BOTCOIN</div>
-    <div class="auth-buttons">
-        <button onclick="openModal('loginModal')">Login</button>
-        <button onclick="openModal('registerModal')">Register</button>
-    </div>
-</div>
-<!-- HEADER IKLAN -->
-<div class="ads-header">
-    <div class="ads-container">
-        <div class="ads-wrapper">
-            <a href="https://contoh-iklan1.com" target="_blank">🔥 Promo Spesial! Dapatkan 50% Bonus BOTCOIN Sekarang!</a>
-            <a href="https://contoh-iklan2.com" target="_blank">🚀 Bergabung di BOTCOIN dan mulai menghasilkan crypto gratis!</a>
-            <a href="https://contoh-iklan3.com" target="_blank">📢 Pasang Iklan di sini hanya dengan BOTCOIN!</a>
+    <div class="background-wrapper"></div>
+
+    <div class="header">
+        <img src="https://raw.githubusercontent.com/BOTCOIN-exe/logo-botcoin/refs/heads/main/Screenshot_2025-02-07-14-32-59-88_99c04817c0de5652397fc8b56c3b3817.jpg" alt="Botcoin Logo" class="logo">
+        <div class="header-title">BOTCOIN</div>
+        <div class="auth-buttons"> 
+            <button onclick="openModal('login-modal')">Login</button>
+            <button onclick="openModal('register-modal')">Register</button>
         </div>
     </div>
+
+    <div class="marquee">
+        <span>🚀 Advertise with BOTCOIN! Login to register your ads for just 1 BOTCOIN! 📢</span>
+    </div>
+
+    <div class="content">
+        <h2 style="color: gold; margin-bottom: 15px;">🟡 Welcome to BOTCOIN!</h2>
+        <p style="font-size: 20px; margin-bottom: 20px; font-weight: bold;">
+            <em>"The Most Trusted Airdrop Platform – Fast, Secure, and Profitable!"</em>
+        </p>
+        <p><strong>Earn Free BOTCOIN just by completing simple tasks!</strong></p>
+        <p style="font-size: 20px; margin-bottom: 10px;">✅ <strong>Earn Free BOTCOIN</strong> just by completing simple tasks!</p>
+        <p style="font-size: 20px; margin-bottom: 20px;">✅ <strong>Join now</strong> and start earning in the digital world!</p>
+        <h3 style="color: blue; margin-bottom: 15px;">💰 Want to Advertise?</h3>
+        <p style="font-size: 20px; margin-bottom: 10px;">Promote your business or project to the right crypto community!</p>
+        <p style="font-size: 20px; font-weight: bold; margin-bottom: 20px;">Payment is made using BOTCOIN!</p>
+        <h3 style="color: gold; margin-bottom: 15px;">📩 Contact Us:</h3>
+        <p style="font-size: 20px; margin-bottom: 20px;">
+            📧 <a href="mailto:botcoin1987@gmail.com" style="color: gold; text-decoration: none; font-weight: bold;">botcoin1987@gmail.com</a>
+        </p>
+    </div>
+    
+    <!-- Modal Login -->
+<div id="login-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeModal('login-modal')">&times;</span>
+        <h2>Login</h2>
+        <input type="email" id="login-email" placeholder="Email" required>
+        <div class="password-container">
+            <input type="password" id="login-password" placeholder="Password" required>
+            <span class="toggle-password" onclick="togglePassword('login-password')">👁️</span>
+        </div>
+        <button onclick="loginUser()">Login</button>
+    </div>
 </div>
 
-<!-- CSS -->
-<style>
-    /* HEADER IKLAN */
-    .ads-header {
-        position: fixed;
-        top: 70px; /* Di bawah header utama */
-        left: 0;
-        width: 100%;
-        height: auto; /* Menyesuaikan tinggi konten */
-        max-height: 50px; /* Maksimum tinggi di desktop */
-        background: gold;
-        display: flex;
-        align-items: center;
-        overflow: hidden;
-        border-bottom: 2px solid black;
-        z-index: 999;
-        padding: 5px 0; /* Jarak dalam */
+    <div id="register-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeModal('register-modal')">&times;</span>
+        <h2>Register</h2>
+        <input type="text" id="register-username" placeholder="Username" required>
+        <input type="email" id="register-email" placeholder="Email" required>
+        <div class="password-container">
+            <input type="password" id="register-password" placeholder="Password" required>
+            <span class="toggle-password" onclick="togglePassword('register-password')">👁️</span>
+        </div>
+        <div class="password-container">
+            <input type="password" id="confirm-password" placeholder="Confirm Password" required>
+            <span class="toggle-password" onclick="togglePassword('confirm-password')">👁️</span>
+        </div>
+        <button onclick="registerUser()">Register</button>
+    </div>
+</div>
+
+    
+        <script>
+            // Inisialisasi Supabase
+const supabaseUrl = 'https://your-project-id.supabase.co';
+const supabaseKey = 'your-anon-key';
+const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+// Fungsi untuk mendaftarkan user
+async function registerUser() {
+    // Ambil data dari form
+    const username = document.getElementById('register-username').value;
+    const email = document.getElementById('register-email').value;
+    const password = document.getElementById('register-password').value;
+    const confirmPassword = document.getElementById('confirm-password').value;
+
+    // Validasi: Cek jika password dan confirm password sama
+    if (password !== confirmPassword) {
+        alert("Passwords do not match!");
+        return;
     }
 
-    .ads-container {
-        width: 100%;
-        overflow: hidden;
-        white-space: nowrap;
+    // Kirim data ke Supabase
+    const { data, error } = await supabase
+        .from('users') // Ganti dengan nama tabel di Supabase
+        .insert([
+            { username, email, password, created_at: new Date() }
+        ]);
+
+    if (error) {
+        alert("Error: " + error.message);
+        return;
     }
 
-    .ads-wrapper {
-        display: flex;
-        width: 300%; /* Membuat efek perulangan */
-        animation: marquee 12s linear infinite;
-    }
-
-    .ads-wrapper a {
-        display: inline-block;
-        font-size: 16px;
-        font-weight: bold;
-        color: black;
-        text-decoration: none;
-        padding: 10px 20px;
-        text-align: center;
-        min-width: 100%;
-        white-space: nowrap;
-    }
-
-    /* Animasi Berjalan */
-    @keyframes marquee {
-        from { transform: translateX(0); }
-        to { transform: translateX(-100%); }
-    }
-
-    /* Responsif di HP */
-    @media (max-width: 768px) {
-        .ads-header {
-            max-height: 40px; /* Lebih kecil di HP */
-            padding: 3px 0;
+    // Jika berhasil, arahkan ke website baru
+    window.location.href = "https://your-website.com"; // Ganti dengan URL yang kamu inginkan
+}
+    document.addEventListener("DOMContentLoaded", function () {
+        function openModal(id) {
+            let modal = document.getElementById(id);
+            if (modal) {
+                modal.style.display = 'flex';
+            }
         }
 
-        .ads-wrapper a {
-            font-size: 14px; /* Ukuran teks lebih kecil */
-            padding: 8px 15px;
+        function closeModal(id) {
+            let modal = document.getElementById(id);
+            if (modal) {
+                modal.style.display = 'none';
+            }
         }
-    }
-</style>
-<!-- MODAL LOGIN -->
-<div class="modal" id="loginModal">
-    <div class="modal-content">
-        <span class="close-icon" onclick="closeModal('loginModal')">&times;</span>
-        <input type="email" placeholder="Email" id="loginEmail">
-        <div class="password-container">
-            <input type="password" placeholder="Password" id="loginPassword">
-            <i class="fa fa-eye toggle-icon" onclick="togglePassword('loginPassword', this)"></i>
-        </div>
-        <button onclick="login()">Login</button>
-    </div>
-</div>
 
-<!-- MODAL REGISTER -->
-<div class="modal" id="registerModal">
-    <div class="modal-content">
-        <span class="close-icon" onclick="closeModal('registerModal')">&times;</span>
-        <input type="text" placeholder="Username" id="regUsername">
-        <input type="email" placeholder="Email" id="regEmail">
-        <div class="password-container">
-            <input type="password" placeholder="Password" id="regPassword">
-            <i class="fa fa-eye toggle-icon" onclick="togglePassword('regPassword', this)"></i>
-        </div>
-        <div class="password-container">
-            <input type="password" placeholder="Confirm Password" id="regConfirmPassword">
-            <i class="fa fa-eye toggle-icon" onclick="togglePassword('regConfirmPassword', this)"></i>
-        </div>
-        <label for="regPhoto" class="photo-label">Upload Profile Photo (Optional)</label>
-        <input type="file" id="regPhoto" accept="image/*" onchange="previewPhoto()">
-        <img id="photoPreview" src="" alt="Profile Preview">
-        <button onclick="register()">Register</button>
-    </div>
-</div>
+        function togglePassword(id) {
+            let input = document.getElementById(id);
+            if (input) {
+                input.type = input.type === "password" ? "text" : "password";
+            }
+        }
 
-<!-- SCRIPT -->
-<script>
-    function openModal(id) {
-        document.getElementById(id).classList.add('show');
-    }
-
-    function closeModal(id) {
-        document.getElementById(id).classList.remove('show');
-    }
-
-    function togglePassword(inputId, icon) {
-        var input = document.getElementById(inputId);
-        input.type = input.type === "password" ? "text" : "password";
-        icon.classList.toggle("fa-eye-slash");
-    }
-</script>
-
-</body>
-    </html>
+        window.openModal = openModal;
+        window.closeModal = closeModal;
+        window.togglePassword = togglePassword;
+    });
+                </script>
