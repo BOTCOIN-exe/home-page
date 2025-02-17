@@ -86,43 +86,7 @@
             background-color: #ffa500;
         }
 
-        /* Iklan berjalan */
-        .marquee {
-            width: 100%;
-            background: rgba(255, 215, 0, 0.8);
-            color: black;
-            padding: 5px 0;
-            position: fixed;
-            top: 60px;
-            font-weight: bold;
-            font-size: 14px;
-            white-space: nowrap;
-            overflow: hidden;
-            z-index: 999;
-        }
-
-        .marquee span {
-            display: inline-block;
-            padding-left: 100%;
-            animation: marquee 15s linear infinite;
-        }
-
-        @keyframes marquee {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-100%); }
-        }
-
-        /* Konten utama */
-        .content {
-            position: relative;
-            z-index: 1;
-            padding: 50px;
-            text-align: center;
-            margin-top: 100px;
-            background: rgba(0, 0, 0, 0.6);
-            border-radius: 10px;
-            padding: 20px;
-        }
+       
         
         /* CSS untuk modal */
         .modal {
@@ -199,7 +163,42 @@
 
             .content {
                 padding: 15px;
-            }
+            }/* Iklan berjalan */
+        .marquee {
+            width: 100%;
+            background: rgba(255, 215, 0, 0.8);
+            color: black;
+            padding: 5px 0;
+            position: fixed;
+            top: 60px;
+            font-weight: bold;
+            font-size: 14px;
+            white-space: nowrap;
+            overflow: hidden;
+            z-index: 999;
+        }
+
+        .marquee span {
+            display: inline-block;
+            padding-left: 100%;
+            animation: marquee 15s linear infinite;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* Konten utama */
+        .content {
+            position: relative;
+            z-index: 1;
+            padding: 50px;
+            text-align: center;
+            margin-top: 100px;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 10px;
+            padding: 20px;
         }
     </style>
 </head>
@@ -224,7 +223,7 @@
         <p style="font-size: 20px; margin-bottom: 20px; font-weight: bold;">
             <em>"The Most Trusted Airdrop Platform – Fast, Secure, and Profitable!"</em>
         </p>
-        <p><strong>Earn Free BOTCOIN just by completing simple tasks!</strong></p>
+       
         <p style="font-size: 20px; margin-bottom: 10px;">✅ <strong>Earn Free BOTCOIN</strong> just by completing simple tasks!</p>
         <p style="font-size: 20px; margin-bottom: 20px;">✅ <strong>Join now</strong> and start earning in the digital world!</p>
         <h3 style="color: blue; margin-bottom: 15px;">💰 Want to Advertise?</h3>
@@ -270,6 +269,32 @@
 
     
         <script>
+            document.addEventListener("DOMContentLoaded", function () {
+        function openModal(id) {
+            let modal = document.getElementById(id);
+            if (modal) {
+                modal.style.display = 'flex';
+            }
+        }
+
+        function closeModal(id) {
+            let modal = document.getElementById(id);
+            if (modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        function togglePassword(id) {
+            let input = document.getElementById(id);
+            if (input) {
+                input.type = input.type === "password" ? "text" : "password";
+            }
+        }
+
+        window.openModal = openModal;
+        window.closeModal = closeModal;
+        window.togglePassword = togglePassword;
+    });
             // Inisialisasi Supabase
 const supabaseUrl = 'https://your-project-id.supabase.co';
 const supabaseKey = 'your-anon-key';
@@ -302,32 +327,39 @@ async function registerUser() {
     }
 
     // Jika berhasil, arahkan ke website baru
-    window.location.href = "https://your-website.com"; // Ganti dengan URL yang kamu inginkan
+    window.location.href = "https://botcoin-exe.github.io/home-pages2/"; // Ganti dengan URL yang kamu inginkan
+}// Fungsi untuk login user
+async function loginUser() {
+    const email = document.getElementById('login-email').value;
+    const password = document.getElementById('login-password').value;
+
+    // Validasi: Pastikan semua kolom diisi
+    if (!email || !password) {
+        alert("Email and password must be filled!");
+        return;
+    }
+
+    try {
+        // Autentikasi login ke Supabase
+        const { data, error } = await supabase.auth.signInWithPassword({
+            email: email,
+            password: password
+        });
+
+        // Jika terjadi error saat login
+        if (error) {
+            alert("Login failed: " + error.message);
+            return;
+        }
+
+        // Jika login berhasil, arahkan ke halaman home
+        alert("Login successful! Redirecting...");
+        window.location.href = "https://botcoin-exe.github.io/home-pages2/";
+
+    } catch (err) {
+        console.error("Unexpected error:", err);
+        alert("An unexpected error occurred. Please try again.");
+    }
 }
-    document.addEventListener("DOMContentLoaded", function () {
-        function openModal(id) {
-            let modal = document.getElementById(id);
-            if (modal) {
-                modal.style.display = 'flex';
-            }
-        }
-
-        function closeModal(id) {
-            let modal = document.getElementById(id);
-            if (modal) {
-                modal.style.display = 'none';
-            }
-        }
-
-        function togglePassword(id) {
-            let input = document.getElementById(id);
-            if (input) {
-                input.type = input.type === "password" ? "text" : "password";
-            }
-        }
-
-        window.openModal = openModal;
-        window.closeModal = closeModal;
-        window.togglePassword = togglePassword;
-    });
-                </script>
+    
+                        </script>
