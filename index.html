@@ -6,8 +6,10 @@
     <title>BOTCOIN</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
     <style>
-        /* Reset Default */
+        /* Style tetap seperti yang kamu buat sebelumnya */
         * {
             margin: 0;
             padding: 0;
@@ -18,7 +20,7 @@
             font-family: Arial, sans-serif;
             color: white;
             text-align: center;
-            display: flex;
+            display: block;
             flex-direction: column;
             align-items: center;
             justify-content: center;
@@ -26,7 +28,28 @@
             height: 100vh;
         }
 
-        /* Background blur */
+        .contact-us {
+            margin-bottom: 80px;
+            margin-top: 550px;
+            padding: 20px;
+            text-align: center;
+            color: gold;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+        }
+
+        .header-bottom {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: gold;
+            padding: 10px 0;
+            z-index: 1000;
+            font-size: 16px;
+        }
+
         .background-wrapper {
             position: fixed;
             top: 0;
@@ -39,7 +62,6 @@
             z-index: -1;
         }
 
-        /* Header */
         .header {
             position: fixed;
             top: 0;
@@ -86,119 +108,118 @@
             background-color: #ffa500;
         }
 
-       
-        
-        /* CSS untuk modal */
         .modal {
             display: none;
             position: fixed;
-            z-index: 900;
-            left: 0;
             top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.7);
             justify-content: center;
             align-items: center;
-            transition: opacity 0.3s ease-in-out;
+            transition: opacity 0.3s ease;
         }
-        
-        
-        
+
         .modal-content {
-            background-color: #fff;
-            padding: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            width: 90%;
+            max-width: 400px;
             border-radius: 10px;
-            width: 85%;
-            max-width: 300px;
-            text-align: center;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            animation: fadeIn 0.3s ease;
             position: relative;
         }
-        
-        .close-modal {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 20px;
-            cursor: pointer;
-            color: #888;
+
+        .modal-content h2 {
+            margin-bottom: 10px;
         }
 
-        
-
-        .close-modal:hover {
-            color: #000;
-        }
-        
-        input {
+        .input-container {
+            position: relative;
             width: 100%;
-            padding: 8px;
-            margin: 10px 0;
-            border: 2px solid #ffd700;
-            border-radius: 5px;
-            outline: none;
-            font-size: 14px;
         }
 
-        .password-container {
-            position: relative;
+        .modal-content input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding-right: 40px;
         }
-        
-        
+
+        .modal-content input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
         .toggle-password {
             position: absolute;
             right: 10px;
             top: 50%;
             transform: translateY(-50%);
             cursor: pointer;
-            font-size: 14px;
+            color: white;
         }
 
-        
-
-        @media screen and (max-width: 768px) {
-            .header-title {
-                font-size: 20px;
-            }
-
-            .content {
-                padding: 15px;
-            }/* Iklan berjalan */
-        .marquee {
+        .modal-content button {
             width: 100%;
-            background: rgba(255, 215, 0, 0.8);
-            color: black;
-            padding: 5px 0;
-            position: fixed;
-            top: 60px;
-            font-weight: bold;
-            font-size: 14px;
-            white-space: nowrap;
-            overflow: hidden;
-            z-index: 999;
+            padding: 10px;
+            background-color: gold;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
         }
 
-        .marquee span {
+        .modal-content button:hover {
+            background-color: orange;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: white;
+        }
+
+        .close-modal:hover {
+            color: red;
+        }
+
+        @keyframes fadeIn {
+            from {
+                transform: scale(0.9);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Teks berjalan */
+        @keyframes scrolling {
+            from {
+                transform: translateX(100%);
+            }
+            to {
+                transform: translateX(-100%);
+            }
+        }
+
+        .scrolling-text {
             display: inline-block;
-            padding-left: 100%;
-            animation: marquee 15s linear infinite;
-        }
-
-        @keyframes marquee {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-100%); }
-        }
-
-        /* Konten utama */
-        .content {
-            position: relative;
-            z-index: 1;
-            padding: 50px;
-            text-align: center;
-            margin-top: 100px;
-            background: rgba(0, 0, 0, 0.6);
-            border-radius: 10px;
-            padding: 20px;
+            white-space: nowrap;
+            animation: scrolling 30s linear infinite; /* Kecepatan 1 cm/detik */
+            animation-delay: 0s; /* Menunda animasi 3 detik */
+            animation-timing-function: 3s;
         }
     </style>
 </head>
@@ -208,158 +229,140 @@
     <div class="header">
         <img src="https://raw.githubusercontent.com/BOTCOIN-exe/logo-botcoin/refs/heads/main/Screenshot_2025-02-07-14-32-59-88_99c04817c0de5652397fc8b56c3b3817.jpg" alt="Botcoin Logo" class="logo">
         <div class="header-title">BOTCOIN</div>
-        <div class="auth-buttons"> 
+        <div class="auth-buttons">
             <button onclick="openModal('login-modal')">Login</button>
             <button onclick="openModal('register-modal')">Register</button>
         </div>
     </div>
 
-    <div class="marquee">
-        <span>🚀 Advertise with BOTCOIN! Login to register your ads for just 1 BOTCOIN! 📢</span>
-    </div>
-
-    <div class="content">
-        <h2 style="color: gold; margin-bottom: 15px;">🟡 Welcome to BOTCOIN!</h2>
-        <p style="font-size: 20px; margin-bottom: 20px; font-weight: bold;">
-            <em>"The Most Trusted Airdrop Platform – Fast, Secure, and Profitable!"</em>
-        </p>
-       
-        <p style="font-size: 20px; margin-bottom: 10px;">✅ <strong>Earn Free BOTCOIN</strong> just by completing simple tasks!</p>
-        <p style="font-size: 20px; margin-bottom: 20px;">✅ <strong>Join now</strong> and start earning in the digital world!</p>
-        <h3 style="color: blue; margin-bottom: 15px;">💰 Want to Advertise?</h3>
-        <p style="font-size: 20px; margin-bottom: 10px;">Promote your business or project to the right crypto community!</p>
-        <p style="font-size: 20px; font-weight: bold; margin-bottom: 20px;">Payment is made using BOTCOIN!</p>
-        <h3 style="color: gold; margin-bottom: 15px;">📩 Contact Us:</h3>
-        <p style="font-size: 20px; margin-bottom: 20px;">
-            📧 <a href="mailto:botcoin1987@gmail.com" style="color: gold; text-decoration: none; font-weight: bold;">botcoin1987@gmail.com</a>
-        </p>
-    </div>
-    
     <!-- Modal Login -->
-<div id="login-modal" class="modal">
-    <div class="modal-content">
-        <span class="close-modal" onclick="closeModal('login-modal')">&times;</span>
-        <h2>Login</h2>
-        <input type="email" id="login-email" placeholder="Email" required>
-        <div class="password-container">
-            <input type="password" id="login-password" placeholder="Password" required>
-            <span class="toggle-password" onclick="togglePassword('login-password')">👁️</span>
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('login-modal')">&times;</span>
+            <h2>Login</h2>
+            <div class="input-container">
+                <input type="email" id="login-email" placeholder="Email" required>
+            </div>
+            <div class="input-container">
+                <input type="password" id="login-password" placeholder="Password" required>
+                <i class="fas fa-eye toggle-password" onclick="togglePassword('login-password')"></i>
+            </div>
+            <button onclick="loginUser()">Login</button>
         </div>
-        <button onclick="loginUser()">Login</button>
     </div>
-</div>
 
+    <!-- Modal Register -->
     <div id="register-modal" class="modal">
-    <div class="modal-content">
-        <span class="close-modal" onclick="closeModal('register-modal')">&times;</span>
-        <h2>Register</h2>
-        <input type="text" id="register-username" placeholder="Username" required>
-        <input type="email" id="register-email" placeholder="Email" required>
-        <div class="password-container">
-            <input type="password" id="register-password" placeholder="Password" required>
-            <span class="toggle-password" onclick="togglePassword('register-password')">👁️</span>
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('register-modal')">&times;</span>
+            <h2>Register</h2>
+            <div class="input-container">
+                <input type="text" id="register-username" placeholder="Username" required>
+            </div>
+            <div class="input-container">
+                <input type="email" id="register-email" placeholder="Email" required>
+            </div>
+            <div class="input-container">
+                <input type="password" id="register-password" placeholder="Password" required>
+                <i class="fas fa-eye toggle-password" onclick="togglePassword('register-password')"></i>
+            </div>
+            <div class="input-container">
+                <input type="password" id="confirm-password" placeholder="Confirm Password" required>
+                <i class="fas fa-eye toggle-password" onclick="togglePassword('confirm-password')"></i>
+            </div>
+            <button onclick="registerUser()">Register</button>
+            <p id="error-message" style="color: red; display: none;">Passwords do not match!</p>
         </div>
-        <div class="password-container">
-            <input type="password" id="confirm-password" placeholder="Confirm Password" required>
-            <span class="toggle-password" onclick="togglePassword('confirm-password')">👁️</span>
-        </div>
-        <button onclick="registerUser()">Register</button>
     </div>
-</div>
 
-    
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
-        function openModal(id) {
-            let modal = document.getElementById(id);
-            if (modal) {
-                modal.style.display = 'flex';
-            }
-        }
+    <!-- Contact Us Section -->
+    <div class="contact-us">
+        <h2>Contact Us</h2>
+        <p>Email: <a href="mailto:botcoin1987@gmail.com" style="color: gold; text-decoration: none;">botcoin1987@gmail.com</a></p>
+    </div>
 
-        function closeModal(id) {
-            let modal = document.getElementById(id);
-            if (modal) {
-                modal.style.display = 'none';
-            }
-        }
+    <!-- Footer Header (Bottom Header) -->
+    <div class="header-bottom">
+        <div class="scrolling-text">
+            🟡 Welcome to BOTCOIN The Most Trusted Airdrop Platform – Fast, Secure, and Profitable! ✅ Earn Free BOTCOIN just by completing simple tasks! ✅ Join now and start earning in the digital world! 💰 Want to Advertise? Promote your business or project to the right crypto community. Payment is made using BOTCOIN! Pay only 1 BOTC for 10 days. Register to pre-sale BOTCOIN in this website botcoin
+        </div>
+    </div>
+ 
+<script>
+    // Supabase Initialization
+    const supabaseUrl = 'SUPABASE_URL';
+    const supabaseKey = 'ANON_KEY SUPABASE';
+    const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
-        function togglePassword(id) {
-            let input = document.getElementById(id);
-            if (input) {
-                input.type = input.type === "password" ? "text" : "password";
-            }
-        }
-
-        window.openModal = openModal;
-        window.closeModal = closeModal;
-        window.togglePassword = togglePassword;
-    });
-            // Inisialisasi Supabase
-const supabaseUrl = 'https://your-project-id.supabase.co';
-const supabaseKey = 'your-anon-key';
-const supabase = supabase.createClient(supabaseUrl, supabaseKey);
-
-// Fungsi untuk mendaftarkan user
-async function registerUser() {
-    // Ambil data dari form
-    const username = document.getElementById('register-username').value;
-    const email = document.getElementById('register-email').value;
-    const password = document.getElementById('register-password').value;
-    const confirmPassword = document.getElementById('confirm-password').value;
-
-    // Validasi: Cek jika password dan confirm password sama
-    if (password !== confirmPassword) {
-        alert("Passwords do not match!");
-        return;
+    function openModal(modalId) {
+        document.getElementById(modalId).style.display = 'flex';
     }
 
-    // Kirim data ke Supabase
-    const { data, error } = await supabase
-        .from('users') // Ganti dengan nama tabel di Supabase
-        .insert([
-            { username, email, password, created_at: new Date() }
-        ]);
-
-    if (error) {
-        alert("Error: " + error.message);
-        return;
+    function closeModal(modalId) {
+        document.getElementById(modalId).style.display = 'none';
     }
 
-    // Jika berhasil, arahkan ke website baru
-    window.location.href = "https://botcoin-exe.github.io/home-pages2/"; // Ganti dengan URL yang kamu inginkan
-}// Fungsi untuk login user
-async function loginUser() {
-    const email = document.getElementById('login-email').value;
-    const password = document.getElementById('login-password').value;
-
-    // Validasi: Pastikan semua kolom diisi
-    if (!email || !password) {
-        alert("Email and password must be filled!");
-        return;
+    function togglePassword(id) {
+        const input = document.getElementById(id);
+        input.type = input.type === "password" ? "text" : "password";
     }
 
-    try {
-        // Autentikasi login ke Supabase
-        const { data, error } = await supabase.auth.signInWithPassword({
-            email: email,
-            password: password
-        });
+    // Register user function
+    async function registerUser() {
+        const username = document.getElementById('register-username').value;
+        const email = document.getElementById('register-email').value;
+        const password = document.getElementById('register-password').value;
+        const confirmPassword = document.getElementById('confirm-password').value;
+        const errorMessage = document.getElementById('error-message');
 
-        // Jika terjadi error saat login
-        if (error) {
-            alert("Login failed: " + error.message);
+        if (password !== confirmPassword) {
+            errorMessage.style.display = 'block';
             return;
+        } else {
+            errorMessage.style.display = 'none';
         }
 
-        // Jika login berhasil, arahkan ke halaman home
-        alert("Login successful! Redirecting...");
-        window.location.href = "https://botcoin-exe.github.io/home-pages2/";
+        try {
+            const { data, error } = await supabase.auth.signUp({
+                email: email,
+                password: password,
+            });
 
-    } catch (err) {
-        console.error("Unexpected error:", err);
-        alert("An unexpected error occurred. Please try again.");
+            if (error) throw error;
+
+            // Add username to your database (you can create a table in Supabase to store additional user info)
+            const { error: insertError } = await supabase
+                .from('users')  // Assuming you have a 'users' table
+                .insert([{ username: username, email: email }]);
+
+            if (insertError) throw insertError;
+
+            alert('User registered successfully!');
+            closeModal('register-modal');
+        } catch (error) {
+            alert(error.message);
+        }
     }
-}
-    
-                        </script>
+
+    // Login user function
+    async function loginUser() {
+        const email = document.getElementById('login-email').value;
+        const password = document.getElementById('login-password').value;
+
+        try {
+            const { user, error } = await supabase.auth.signInWithPassword({
+                email: email,
+                password: password,
+            });
+
+            if (error) throw error;
+
+            alert('Login successful!');
+            closeModal('login-modal');
+        } catch (error) {
+            alert(error.message);
+        }
+    }
+</script>
+</body>
+    </html>
