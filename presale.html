@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Botcoin Pre-Sale</title>
+    <style>
+        /* General Styling */
+        body {
+            font-family: 'Georgia', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('https://raw.githubusercontent.com/BOTCOIN-exe/logo-botcoin/refs/heads/main/Screenshot_2025-02-07-14-32-59-88_99c04817c0de5652397fc8b56c3b3817.jpg') no-repeat center center/cover;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: gold;
+        }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        .logo img {
+            height: 50px;
+        
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 10px;
+            font-size: 15px;
+            transition: color 0.3s ease;
+        }
+        nav a:hover {
+            color: #e09e34;
+        }
+        #hero {
+            margin: 20px 0;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+        #hero h1 {
+            font-size: 2.5rem;
+        }
+        #hero p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+        #hero button {
+            background-color: #e09e34;
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        #hero button:hover {
+            background-color: #c7801f;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-content {
+            background: white;
+            color: black;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+        .modal-content input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .modal-content button {
+            background-color: #e09e34;
+            border: none;
+            padding: 10px 20px;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .modal-content button:hover {
+            background-color: #c7801f;
+        }
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 30px;
+            color: black;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+        }
+        footer {
+            margin-top: 20px;
+            color: white;
+            background: rgba(0, 0, 0, 0.7);
+        }
+        footer a {
+            color: #e09e34;
+            text-decoration: none;
+            background: rgba(0, 0, 0, 0.7);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <img src="https://raw.githubusercontent.com/BOTCOIN-exe/logo-botcoin/refs/heads/main/Screenshot_2025-02-07-14-32-59-88_99c04817c0de5652397fc8b56c3b3817.jpg" alt="Botcoin Logo">
+            </div>
+            <div class="title">BOT SALE</div>
+            <nav>
+                <a href="#home">Home</a>
+                <a href="mailto:botcoin1987@gmail.com">Contact</a>
+            </nav>
+        </header>
+        <section id="hero">
+            <h1>Join the Botcoin Pre-Sale</h1>
+            <p>Get your Botcoin tokens early at a discounted price.</p>
+            <button onclick="openModal()">Buy Botcoin Now</button>
+        </section>
+    </div>
+    <div id="buyModal" class="modal" onclick="closeModal()">
+        <div class="modal-content" onclick="event.stopPropagation();">
+            <span class="close-btn">×</span>
+            <h2>Buy Botcoin</h2>
+            <form>
+                <input type="number" placeholder="Amount (BOTCOIN)" min="1" max="10000" required>
+                <input type="text" placeholder="Your Wallet Address" required>
+                <button type="submit">Buy Now</button>
+            </form>
+        </div>
+    </div>
+    <footer>
+        <p>Follow us on social media: <a href="https://youtube.com/@botcoin-f6f?si=Z5Q85fFGixar4y55">YouTube</a> | <a href="https://twitter.com/BotcoinOfficial">Twitter</a> | <a href="https://t.me/@botcoinofficial1">Telegram</a></p>
+    </footer>
+    <script>
+    // Open Modal Function
+    function openModal() {
+        document.getElementById('buyModal').style.display = 'flex';
+    }
+
+    // Close Modal Function
+    function closeModal() {
+        document.getElementById('buyModal').style.display = 'none';
+    }
+
+    // Add event listener to close the modal when clicking the '×' icon
+    document.querySelector('.close-btn').addEventListener('click', function(event) {
+        event.stopPropagation(); // Stop event from propagating to modal
+        closeModal();
+    });
+    </script>
+</body>
+</html>
