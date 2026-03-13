@@ -1,215 +1,175 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BOTCOIN</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BOTCOIN</title>
+<link rel="icon" href="https://raw.githubusercontent.com/BOTCOIN-exe/Logo/main/botcoin_logo.png" type="image/png">
 
-    <style>
-        /* Style tetap seperti yang kamu buat sebelumnya */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.162.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-        body {
-            font-family: Arial, sans-serif;
-            color: white;
-            text-align: center;
-            display: block;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            height: 100vh;
-        }
+<style>
+body{margin:0;font-family:Arial,sans-serif;background:#000;color:white;text-align:center;overflow-x:hidden;position:relative;}
+canvas#particles{position:fixed;top:0;left:0;z-index:0;pointer-events:none;}
+header{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;padding:20px 30px;background:#111;border-bottom:2px solid gold;z-index:2;position:relative;}
+.logo{display:flex;align-items:center;flex:1;}
+.logo img{width:64px;height:64px;margin-right:12px;}
+.logo span{color:gold;font-size:28px;font-weight:bold;text-shadow:0 0 10px gold,0 0 25px #fff;}
+button{padding:12px 20px;border-radius:12px;border:none;font-weight:bold;color:black;cursor:pointer;transition:0.5s all;}
+button.gold{background:linear-gradient(45deg,#ffd700,#fff700);box-shadow:0 0 10px gold,0 0 25px #ffd700 inset;animation:neonGold 1.5s infinite alternate;}
+button.pink{background:linear-gradient(45deg,#ff69b4,#ff1493);box-shadow:0 0 10px #ff69b4,0 0 25px #ff1493 inset;animation:neonPink 1.5s infinite alternate;}
+@keyframes neonGold{0%{box-shadow:0 0 10px gold,0 0 20px #fff inset;}50%{box-shadow:0 0 20px gold,0 0 35px #fff inset;}100%{box-shadow:0 0 12px gold,0 0 25px #fff inset;}}
+@keyframes neonPink{0%{box-shadow:0 0 10px #ff69b4,0 0 20px #ff1493 inset;}50%{box-shadow:0 0 20px #ff69b4,0 0 35px #ff1493 inset;}100%{box-shadow:0 0 12px #ff69b4,0 0 25px #ff1493 inset;}}
+button:hover{transform:scale(1.08);}
+.hero{margin:60px auto;max-width:480px;background:rgba(255,215,0,0.05);border:1px solid gold;border-radius:20px;padding:30px;box-shadow:0 0 40px rgba(255,215,0,0.4);display:flex;flex-direction:column;align-items:center;gap:15px;position:relative;z-index:1;}
+.hero h1{font-size:36px;color:gold;text-shadow:0 0 5px #fff,0 0 10px gold,0 0 20px #ffd700,0 0 40px #fff700;}
+.hero p{font-size:16px;color:#fff;text-shadow:0 0 10px black;}
+.wallet,.balance,.supply{font-size:16px;text-shadow:0 0 5px #fff,0 0 10px gold,0 0 20px #ffd700;}
+#coin3d{width:220px;height:220px;cursor:grab;margin:15px 0;border-radius:50%;box-shadow:0 0 30px gold inset;}
+.section{margin:50px auto;padding:20px;max-width:480px;border-radius:20px;border:1px solid gold;box-shadow:0 0 30px rgba(255,215,0,0.3);position:relative;z-index:1;text-align:left;color:white;font-size:14px;line-height:1.5em;}
+.section h2{color:gold;font-size:22px;margin-bottom:10px;}
+.section h3{color:#ffd700;font-size:18px;margin-top:15px;}
+.section ul{padding-left:20px;margin-bottom:10px;}
+.section p{margin-bottom:10px;}
+canvas#botcoinChart{max-width:100%;height:auto;border-radius:12px;box-shadow:0 0 30px gold;}
+footer{margin-top:50px;padding:15px;border-top:1px solid gold;color:gold;font-size:13px;text-shadow:0 0 5px gold,0 0 10px #fff;position:relative;z-index:1;}
+@media screen and (max-width:480px){.logo span{font-size:22px;}#coin3d{width:180px;height:180px;}.hero,.section{max-width:95%;padding:15px;}.hero div[style*="display:flex"]{flex-wrap:wrap;}}
+</style>
+</head>
+<body>
 
-        .contact-us {
-            margin-bottom: 80px;
-            margin-top: 550px;
-            padding: 20px;
-            text-align: center;
-            color: gold;
-            background-color: rgba(0, 0, 0, 0.7);
-            border-radius: 10px;
-        }
+<canvas id="particles"></canvas>
 
-        .header-bottom {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            color: gold;
-            padding: 10px 0;
-            z-index: 1000;
-            font-size: 16px;
-        }
+<header>
+  <div class="logo">
+    <img src="https://raw.githubusercontent.com/BOTCOIN-exe/Logo/main/botcoin_logo.png" alt="BOTCOIN Logo">
+    <span>BOTCOIN</span>
+  </div>
+  <button id="walletButton" class="gold" onclick="connectWallet()">Connect Wallet</button>
+</header>
 
-        .background-wrapper {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('https://raw.githubusercontent.com/BOTCOIN-exe/logo-botcoin/refs/heads/main/Screenshot_2025-02-07-14-32-59-88_99c04817c0de5652397fc8b56c3b3817.jpg') no-repeat center center;
-            background-size: cover;
-            filter: blur(5px);
-            z-index: -1;
-        }
+<div class="hero">
+    <h1>BOTCOIN</h1>
+    <p>Next-Gen Community Crypto Token</p>
+    <div id="wallet">Wallet not connected</div>
+    <div class="balance" id="balance">Balance: 0</div>
+    <div class="supply" id="supply">Total Supply: 10,000,000 BOT</div>
+    <div id="coin3d"></div>
 
-        .header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 60px;
-            background: rgba(0, 0, 0, 0.8);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 10px 20px;
-            border-bottom: 2px solid gold;
-            z-index: 1000;
-        }
+<div style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:15px;">
+        <select id="inputToken">
+            <option value="0xBB4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c">BNB</option>
+            <option value="0x55d398326f99059fF775485246999027B3197955">USDT</option>
+        </select>
+        <button class="gold" onclick="swapBotcoin()">Swap → BOTCOIN</button>
+        <button class="gold" onclick="addToken()">Add BOTCOIN to Wallet</button>
+        <button class="pink" onclick="openPresale()">Pre Sale</button>
+        <button class="pink" onclick="openStaking()">Staking</button>
+    </div>
+</div>
 
-        .header-title {
-            font-size: 24px;
-            font-weight: bold;
-            color: gold;
-        }
+<div class="section">
+    <h2>Live Chart</h2>
+    <canvas id="botcoinChart"></canvas>
+</div>
 
-        .logo {
-            width: 40px;
-            height: 40px;
-        }
+<div class="section" id="whitepaper">
+    <h2>Whitepaper BOTCOIN</h2>
+    <h3>1. Introduction</h3>
+    <p>BOTCOIN adalah token inovatif yang memanfaatkan blockchain untuk transparansi dan investasi.</p>
+    <h3>2. Vision & Mission</h3>
+    <p>Visi BOTCOIN: menjadi token yang aman, mudah dipakai, dan memberi nilai tambah melalui staking.</p>
+    <h3>3. Tokenomics</h3>
+    <ul>
+        <li>Total Supply: 10,000,000 BOT</li>
+        <li>Initial Liquidity Pool: 40% token from pre sale</li>
+        <li>Staking Reward: 5% per moonth</li>
+        <li>developer: 2,5% from 8.000.000 BOT in wallet</li>
+      <li>founder: 2,5% from 8.000.000 BOT in wallet</li>
+    </ul>
+    <h3>4. Use Cases</h3>
+    <ul>
+        <li>Swap on decentralized exchanges</li>
+        <li>Staking for you passive income</li>
+    </ul>
+    <h3>5. Roadmap</h3>
+    <ul>
+        <li>Q1 2026: 40% from 8.000.000 BOT in presale in pinksale</li>
+        <li>Q2 2026: 55% from 8.000.000 BOT Integrate reward staking</li>
+        <li>Q3 2026: Expansion, partnerships, listing on DEX/CEX</li>
+    </ul>
+    <h3>6. Security & Governance</h3>
+    <p>Smart contract aman dengan audit internal & governance komunitas berbasis voting token holder.</p>
+    <h3>7. Conclusion</h3>
+    <p>BOTCOIN membangun ekosistem komunitas yang berkelanjutan, transparan, dan menguntungkan semua pemegang token.</p>
+</div>
 
-        .auth-buttons {
-            display: flex;
-            gap: 10px;
-        }
+<footer>BOTCOIN © 2026</footer>
 
-        button {
-            padding: 8px 16px;
-            font-size: 14px;
-            background-color: #ffd700;
-            color: #000;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
+<script>
+// ==== Particles ====
+const canvas=document.getElementById('particles');
+const ctx=canvas.getContext('2d');
+let particles=[];
+function resizeCanvas(){canvas.width=window.innerWidth; canvas.height=window.innerHeight;}
+window.addEventListener('resize',resizeCanvas);
+resizeCanvas();
+for(let i=0;i<150;i++){particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*2+1,speed:Math.random()*1+0.3});}
+function animateParticles(){ctx.clearRect(0,0,canvas.width,canvas.height);particles.forEach(p=>{p.y-=p.speed;if(p.y<0)p.y=canvas.height;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle='rgba(255,215,0,0.8)';ctx.fill();});requestAnimationFrame(animateParticles);}
+animateParticles();
 
-        button:hover {
-            background-color: #ffa500;
-        }
+// ==== Wallet ====
+let provider, signer, walletAddress;
+const tokenAddress="0x7B8e0c77E7f4f3C82480A33201f13F34379B6D5d";
+const tokenABI=["function balanceOf(address) view returns (uint256)"];
+let tokenContract, chart;
 
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            justify-content: center;
-            align-items: center;
-            transition: opacity 0.3s ease;
-        }
+async function connectWallet(){
+    if(!window.ethereum){alert("Install MetaMask / Trust Wallet"); return;}
+    provider=new ethers.providers.Web3Provider(window.ethereum);
+    await provider.send("eth_requestAccounts",[]);
+    signer=provider.getSigner();
+    walletAddress=await signer.getAddress();
+    tokenContract=new ethers.Contract(tokenAddress,tokenABI,provider);
+    document.getElementById("wallet").innerText=walletAddress.slice(0,6)+"..."+walletAddress.slice(-4);
+    let btn=document.getElementById("walletButton");
+    btn.innerText="Disconnect Wallet";
+    btn.className="pink";
+    btn.onclick=disconnectWallet;
+    await loadBalance();
+    initChart();
+    updateChart();
+}
 
-        .modal-content {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            width: 90%;
-            max-width: 400px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(10px);
-            animation: fadeIn 0.3s ease;
-            position: relative;
-        }
+function disconnectWallet(){
 
-        .modal-content h2 {
-            margin-bottom: 10px;
-        }
+walletAddress=null;
+    signer=null;
+    document.getElementById("wallet").innerText="Wallet not connected";
+    document.getElementById("balance").innerText="Balance: 0";
+    let btn=document.getElementById("walletButton");
+    btn.innerText="Connect Wallet";
+    btn.className="gold";
+    btn.onclick=connectWallet;
+}
 
-        .input-container {
-            position: relative;
-            width: 100%;
-        }
+// ==== Token Actions ====
+async function loadBalance(){if(!walletAddress) return; try{const bal=await tokenContract.balanceOf(walletAddress);document.getElementById("balance").innerText="Balance: "+ethers.utils.formatEther(bal);}catch(e){document.getElementById("balance").innerText="Balance: Error";}}
+async function addToken(){if(!walletAddress) return; try{await window.ethereum.request({method:'wallet_watchAsset',params:{type:'ERC20',options:{address:tokenAddress,symbol:'BOT',decimals:18,image:'https://raw.githubusercontent.com/BOTCOIN-exe/Logo/main/botcoin_logo.png'}}});}catch(e){console.error(e);}}
+function swapBotcoin(){const inputToken=document.getElementById("inputToken").value;window.open(https://pancakeswap.finance/swap?inputCurrency=${inputToken}&outputCurrency=${tokenAddress},"_blank");}
+function openPresale(){window.open("https://www.pinksale.finance/launchpad/your_project_id","_blank");}
+function openStaking(){window.open("https://botcoin-exe.github.io/botcoin-staking/","_blank");}
 
-        .modal-content input {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: none;
-            border-radius: 5px;
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            padding-right: 40px;
-        }
+// ==== Chart ====
+function initChart(){const ctx=document.getElementById("botcoinChart").getContext("2d");chart=new Chart(ctx,{type:'line',data:{labels:[],datasets:[{label:'Total Claims',data:[],borderColor:'gold',backgroundColor:'rgba(255,215,0,0.3)',fill:true,tension:0.4}]},options:{responsive:true,interaction:{mode:'nearest',intersect:false},plugins:{tooltip:{enabled:true,backgroundColor:'rgba(255,215,0,0.9)',titleColor:'#000',bodyColor:'#000'}}}});}
+function updateChart(){if(!chart||!walletAddress)return;const time=new Date().toLocaleTimeString();chart.data.labels.push(time);chart.data.datasets[0].data.push(Math.floor(Math.random()*100));if(chart.data.labels.length>20){chart.data.labels.shift();chart.data.datasets[0].data.shift();}chart.update();}
+setInterval(updateChart,5000);
 
-        .modal-content input::placeholder {
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        .toggle-password {
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            cursor: pointer;
-            color: white;
-        }
-
-        .modal-content button {
-            width: 100%;
-            padding: 10px;
-            background-color: gold;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        .modal-content button:hover {
-            background-color: orange;
-        }
-
-        .close-modal {
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            font-size: 24px;
-            cursor: pointer;
-            color: white;
-        }
-
-        .close-modal:hover {
-            color: red;
-        }
-
-        @keyframes fadeIn {
-            from {
-                transform: scale(0.9);
-                opacity: 0;
-            }
-            to {
-                transform: scale(1);
-                opacity: 1;
-            }
-        }
-
-        /* Teks berjalan */
-        @keyframes scrolling {
-            from {
-                transform: translateX(100%);
-            }
-            to {
-                transform: translateX(-100%);
-            }
-        }
+// ==== 3D Logo ====
+function init3DLogo(){const container=document.getElementById('coin3d');const scene=new THREE.Scene();const camera=new THREE.PerspectiveCamera(75,1,0.1,1000);const renderer=new THREE.WebGLRenderer({alpha:true,antialias:true});renderer.setSize(container.clientWidth,container.clientHeight);container.appendChild(renderer.domElement);const light=new THREE.PointLight(0xffd700,1,100);light.position.set(5,5,5);scene.add(light);const geometry=new THREE.PlaneGeometry(2,2);const texture=new THREE.TextureLoader().load('https://raw.githubusercontent.com/BOTCOIN-exe/Logo/main/botcoin_logo.png');const material=new THREE.MeshStandardMaterial({map:texture,transparent:true});const plane=new THREE.Mesh(geometry,material);scene.add(plane);camera.position.z=3;let isDragging=false,prevX=0;container.addEventListener('mousedown',e=>{isDragging=true;prevX=e.clientX});container.addEventListener('mouseup',()=>{isDragging=false});container.addEventListener('mousemove',e=>{if(isDragging)plane.rotation.y+=(e.clientX-prevX)*0.01;prevX=e.clientX});container.addEventListener('touchstart',e=>{isDragging=true;prevX=e.touches[0].clientX});container.addEventListener('touchend',()=>{isDragging=false});container.addEventListener('touchmove',e=>{if(isDragging)plane.rotation.y+=(e.touches[0].clientX-prevX)*0.01;prevX=e.touches[0].clientX},{passive:false});function animate(){requestAnimationFrame(animate);plane.rotation.y+=0.0035;renderer.render(scene,camera);}animate();}
+init3DLogo();
+</script>
+</body>
+</html>
